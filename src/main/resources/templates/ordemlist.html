@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Ordens</title>
+</head>
+<body>
+<h1>Lista de Ordens</h1>
+<table>
+    <thead>
+    <tr>
+
+        <th>Responsável</th>
+        <th>Data</th>
+        <!-- Adicione outras colunas desejadas -->
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterar sobre a lista de ordens -->
+    <tr th:each="ordem : ${ordens}">
+        <td th:text="${ordem.responsavel}"></td>
+        <td th:text="${ordem.data}"></td>
+        <!-- Adicione outras colunas desejadas -->
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

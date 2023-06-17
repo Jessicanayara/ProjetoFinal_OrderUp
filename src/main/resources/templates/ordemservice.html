@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Criar Ordem de Serviço</title>
+</head>
+<body>
+<h1>Criar Ordem de Serviço</h1>
+
+<form th:action="@{'/' + ${id} + '/orderservice'}" method="POST">
+  <div>
+    <label for="responsavel">Responsável:</label>
+    <input type="text" id="responsavel" name="responsavel" required>
+  </div>
+  <div>
+    <label for="data">Data:</label>
+    <input type="date" id="data" name="data" required>
+  </div>
+  <div>
+    <label for="id_cliente">ID do Cliente:</label>
+    <input type="text" id="id_cliente" name="id_cliente" required>
+  </div>
+  <div>
+    <label for="id_servico">ID do Serviço:</label>
+    <input type="text" id="id_servico" name="id_servico" required>
+  </div>
+  <div>
+    <label for="servico_quant">Quantidade do Serviço:</label>
+    <input type="text" id="servico_quant" name="servico_quant" required>
+  </div>
+  <div>
+    <label for="servico_valor">Valor do Serviço:</label>
+    <input type="text" id="servico_valor" name="servico_valor" required>
+  </div>
+  <div>
+    <label for="assinatura">Assinatura:</label>
+    <input type="text" id="assinatura" name="assinatura">
+  </div>
+  <div>
+    <label for="documento">Documento:</label>
+    <input type="text" id="documento" name="documento">
+  </div>
+  <div>
+    <label for="comentario">Comentário:</label>
+    <textarea id="comentario" name="comentario"></textarea>
+  </div>
+  <div>
+    <label for="valortotal">Valor Total:</label>
+    <input type="text" id="valortotal" name="valortotal" required>
+  </div>
+  <div>
+    <label for="form_pagamento">Forma de Pagamento:</label>
+    <input type="text" id="form_pagamento" name="form_pagamento">
+  </div>
+  <div>
+    <input type="submit" value="Criar Ordem de Serviço">
+  </div>
+</form>
+<a th:href="@{'/' + ${id} + '/ordemlist'}"><label>clique</label></a>
+</body>
+</html>
