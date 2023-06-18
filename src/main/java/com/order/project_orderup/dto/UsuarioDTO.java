@@ -24,9 +24,6 @@ public class UsuarioDTO {
     @CPF(message = "CPF inválido")
     private String cpf;
 
-    @CNPJ(message = "CNPJ inválido")
-    private String cnpj;
-
     @NotBlank(message = "Email é obrigatório")
     private String email;
 

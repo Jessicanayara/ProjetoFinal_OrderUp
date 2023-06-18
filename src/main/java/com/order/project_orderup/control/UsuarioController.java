@@ -52,6 +52,7 @@ public class UsuarioController {
     public String cadastrarUsuario(  @Valid @ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
+
             return "cadastro";
         }
 
@@ -87,10 +88,6 @@ public class UsuarioController {
         return "perfil";
     }
 
-    @DeleteMapping("/excluir/{id}")
-    public String deleteUsuarioById(@PathVariable("id")Long id) {
-        usuarioService.delete(id);
-        return "excluido";
-    }
+
 
 }

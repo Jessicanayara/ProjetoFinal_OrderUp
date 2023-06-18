@@ -61,12 +61,7 @@ public class UsuarioService {
         return modelMapper.map(usuario, UsuarioDTO.class);
     }
 
-    public List<UsuarioDTO> list() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
-        return usuarios.stream()
-                .map(usuario -> modelMapper.map(usuario, UsuarioDTO.class))
-                .collect(Collectors.toList());
-    }
+
 
     public UsuarioDTO buscar(long id) {
         Usuario usuario = usuarioRepository.findById(id)
@@ -75,9 +70,4 @@ public class UsuarioService {
     }
 
 
-
-    @Transactional
-    public void delete(long id) {
-        usuarioRepository.deleteById(id);
-    }
 }

@@ -94,12 +94,20 @@ public class ClienteService {
     }
 
     @Transactional
-    public void delete(long id) {
-        Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Cliente não encontrado"));
+    public void delete(long id,Long usuarioId) {
+        Cliente cliente = clienteRepository.findByIdAndUsuarioId(id, usuarioId);
+        if (cliente == null) {
+            throw new IllegalArgumentException("O cliente não pertence ao usuário.");
+        }
         clienteRepository.delete(cliente);
     }
 
 
-
+    public ClienteDTO findByName(String nome) {
+        Cliente cliente = clienteRepository.findByName(nome);
+        if (cliente == null) {
+            return null;
+        }
+        return modelMapper.map(cliente, ClienteDTO.class);
+    }
 }

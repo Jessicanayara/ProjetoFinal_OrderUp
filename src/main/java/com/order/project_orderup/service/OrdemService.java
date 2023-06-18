@@ -37,12 +37,9 @@ public class OrdemService {
                 .collect(Collectors.toList());
     }
 
-    public OrdemDTO buscar(long id) {
-        Ordem ordem = ordemRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Ordem não encontrada"));
-        return modelMapper.map(ordem, OrdemDTO.class);
-    }
 
+
+    //////////
     public void atualizarOrdem(Long usuarioId, Long ordemId, OrdemDTO ordemDTO) {
         // Verificar se a ordem pertence ao usuário
         Ordem ordem = ordemRepository.findByIdAndUsuarioId(ordemId, usuarioId);
@@ -60,9 +57,11 @@ public class OrdemService {
 
 
     @Transactional
-    public void delete(long id) {
-        Ordem ordem = ordemRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Ordem não encontrada"));
+    public void delete(long id,Long ordemId) {
+        Ordem ordem = ordemRepository.findByIdAndUsuarioId(ordemId, id);
+        if (ordem == null) {
+            throw new IllegalArgumentException("A ordem não pertence ao usuário.");
+        }
         ordemRepository.delete(ordem);
     }
 }

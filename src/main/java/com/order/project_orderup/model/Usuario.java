@@ -28,9 +28,6 @@ public class Usuario {
     private String cpf;
 
     @Column(length = 100)
-    private String cnpj;
-
-    @Column(length = 100)
     private String email;
 
     @Column(length = 100)
