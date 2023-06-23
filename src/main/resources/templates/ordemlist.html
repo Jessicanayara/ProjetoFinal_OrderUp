@@ -12,15 +12,24 @@
 
         <th>Responsável</th>
         <th>Data</th>
-        <!-- Adicione outras colunas desejadas -->
+
     </tr>
     </thead>
     <tbody>
-    <!-- Iterar sobre a lista de ordens -->
+
     <tr th:each="ordem : ${ordens}">
-        <td th:text="${ordem.responsavel}"></td>
+
         <td th:text="${ordem.data}"></td>
-        <!-- Adicione outras colunas desejadas -->
+        <td th:text="${ordem.cliente.nome}"></td>
+        <td><form th:action="@{'/' + ${id} + '/' + ${ordem.setId()} + '/deleteorder'}" method="post">
+            <button type="submit">Excluir</button>
+        </form></td>
+        <td><form th:action="@{'/' + ${id} + '/' + ${ordem.setId()} + '/updateorder'}" method="get">
+            <button type="submit">Editar</button>
+        </form></td>
+
+
+
     </tr>
     </tbody>
 </table>

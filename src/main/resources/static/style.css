@@ -1,0 +1,73 @@
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+    background-color: #6FCF97;
+}
+
+.card{
+    border: none;
+}
+
+.custom-navbar {
+    background-color: #6FCF97; /* Cor personalizada */
+}
+
+.card-container{
+
+    background-color: #6FCF97;
+    padding: 50px;
+
+
+}
+
+.perfil{
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+
+
+}
+
+
+#os{
+    background-color: #e7e8e8;
+
+}
+
+.custom-form-floating {
+    font-size: 12px;
+}
+
+.row{
+    margin-bottom: 15px;
+}
+
+.card-container-custom{
+    margin: 15px;
+}
+
+span{
+    margin: 15px;
+}
+
+.AM{
+
+    background-color: #e7e8e8;
+}
+
+.card-section {
+    height: 100vh;
+}
+
+.card-section .card {
+    border-radius: 1rem;
+}
+
+.card-section .col-10 {
+    max-width: 400px;
+}
+#cadastro{
+
+    display: none;
+}

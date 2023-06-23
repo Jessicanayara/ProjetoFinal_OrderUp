@@ -23,6 +23,7 @@ class Ordem{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

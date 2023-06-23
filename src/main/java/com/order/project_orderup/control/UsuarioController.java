@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-//@RestController("/OrderUp")
+
 @Controller
 
 public class UsuarioController {
@@ -21,15 +21,15 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/login")
+   /* @GetMapping("/login")
     public String showLoginForm() {
         return "login";
-    }
+    }*/
 
-    @GetMapping("/cadastro")
+    @GetMapping("/home")
     public String showCadForm( Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
-        return "cadastro";
+        return "home";
     }
 
     @PostMapping("/login")
@@ -37,10 +37,10 @@ public class UsuarioController {
         UsuarioDTO usuarioEncontrado = usuarioService.findByEmail(usuarioDTO.getEmail());
         if (usuarioEncontrado == null) {
             model.addAttribute("mensagem", "Usuário não encontrado");
-            return "login";
+            return "home";
         }
         Long id = usuarioEncontrado.getId();
-        return "redirect:/" + id + "/orderservice";
+        return "redirect:/" + id + "/perfil";
     }
 
 
@@ -48,40 +48,41 @@ public class UsuarioController {
 
 
 
-    @PostMapping("/cadastro")
+    @PostMapping("/cadastrar")
     public String cadastrarUsuario(  @Valid @ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
 
-            return "cadastro";
+            return "home";
         }
 
         UsuarioDTO usuarioEmail = usuarioService.findByEmail(usuarioDTO.getEmail());
         if (usuarioEmail != null) {
             model.addAttribute("mensagemErro", "Usuário já existe com este email");
-            return "cadastro";
+            return "home";
         }
 
         UsuarioDTO usuarioCPF = usuarioService.findByCpf(usuarioDTO.getCpf());
         if (usuarioCPF != null) {
             model.addAttribute("mensagemErro", "Usuário já existe com este CPF");
-            return "cadastro";
+            return "home";
         }
 
         try {
             UsuarioDTO novoUsuario = usuarioService.save(usuarioDTO);
             model.addAttribute("mensagemSucesso", "Usuário cadastrado com sucesso!");
+            return "home";
         } catch (IllegalArgumentException e) {
             model.addAttribute("mensagemErro", "Usuário não cadastrado. " + e.getMessage());
-            return "cadastro";
+            return "home";
         }
 
-        return "cadastro";
+
     }
 
 
 
-    @GetMapping("/perfil/{id}")
+    @GetMapping("/{id}/perfil")
     public String getUsuarioById(@PathVariable("id") Long id, Model model) {
         UsuarioDTO usuario = usuarioService.buscar(id);
         model.addAttribute("usuario", usuario);

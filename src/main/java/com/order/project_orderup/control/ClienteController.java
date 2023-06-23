@@ -33,7 +33,7 @@ public class ClienteController {
     }
 
     @PostMapping("/{id}/clienteservice")
-    public String createCliente(@Valid @PathVariable("id") Long id, BindingResult bindingResult, Model model, ClienteDTO clienteDTO) {
+    public String createCliente( @PathVariable("id") Long id, @Valid @ModelAttribute ClienteDTO clienteDTO, BindingResult bindingResult, Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
 
 
@@ -41,21 +41,21 @@ public class ClienteController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
             model.addAttribute("id", id);
-            return "/{id}/clienteservice";
+            return "clienteservice";
         }
 
         ClienteDTO clienteCpf= clienteService.findByCpf(clienteDTO.getCpf());
         if (clienteCpf != null) {
             model.addAttribute("mensagemErro", "Este cliente já existe");
             model.addAttribute("id", id);
-            return "/{id}/clienteservice";
+            return "clienteservice";
         }
 
         ClienteDTO clienteCNPJ= clienteService.findByCnpj(clienteDTO.getCnpj());
         if (clienteCNPJ != null) {
             model.addAttribute("mensagemErro", "Este cliente já existe");
             model.addAttribute("id", id);
-            return "/{id}/clienteservice";
+            return "clienteservice";
         }
 
         try {
@@ -63,13 +63,15 @@ public class ClienteController {
             clienteService.save(clienteDTO);
             model.addAttribute("clienteDTO", clienteDTO);
             model.addAttribute("mensagemSucesso", "Cliente cadastrado com sucesso!");
+            return "clientelist";
+
         } catch (IllegalArgumentException e) {
             model.addAttribute("mensagemErro", "Cliente não cadastrado. " + e.getMessage());
             model.addAttribute("id", id);
-            return "/{id}/clienteservice";
+            return "clienteservice";
         }
 
-        return "/{id}/clienteservice";
+
     }
 
     @GetMapping("/{id}/clientelist")

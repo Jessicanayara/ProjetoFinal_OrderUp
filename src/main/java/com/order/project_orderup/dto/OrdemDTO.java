@@ -1,6 +1,5 @@
 package com.order.project_orderup.dto;
 
-import com.order.project_orderup.model.Cliente;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
@@ -8,7 +7,9 @@ import org.hibernate.validator.constraints.br.CPF;
 @Data
 public class OrdemDTO {
 
+
     private UsuarioDTO usuario;
+
 
     @NotBlank(message = "campo obrigatorio")
     private String responsavel;

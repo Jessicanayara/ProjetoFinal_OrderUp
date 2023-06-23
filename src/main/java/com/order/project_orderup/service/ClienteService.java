@@ -103,8 +103,8 @@ public class ClienteService {
     }
 
 
-    public ClienteDTO findByName(String nome) {
-        Cliente cliente = clienteRepository.findByName(nome);
+    public ClienteDTO findByNome(String nome) {
+        Cliente cliente = clienteRepository.findByNome(nome);
         if (cliente == null) {
             return null;
         }

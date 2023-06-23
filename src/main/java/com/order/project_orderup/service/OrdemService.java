@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 
+import com.order.project_orderup.dto.ClienteDTO;
 import com.order.project_orderup.dto.OrdemDTO;
 import com.order.project_orderup.dto.UsuarioDTO;
 import com.order.project_orderup.model.Ordem;
@@ -33,7 +34,12 @@ public class OrdemService {
     public List<OrdemDTO> lista(UsuarioDTO usuarioId) {
         List<Ordem> ordens = ordemRepository.findByUsuarioId(usuarioId.getId());
         return ordens.stream()
-                .map(ordem -> modelMapper.map(ordem, OrdemDTO.class))
+                .map(ordem -> {
+                    OrdemDTO ordemDTO = modelMapper.map(ordem, OrdemDTO.class);
+                    ordemDTO.setCliente(modelMapper.map(ordem.getCliente(), ClienteDTO.class));
+                    ordemDTO.setId(ordem.getId());
+                    return ordemDTO;
+                })
                 .collect(Collectors.toList());
     }
 

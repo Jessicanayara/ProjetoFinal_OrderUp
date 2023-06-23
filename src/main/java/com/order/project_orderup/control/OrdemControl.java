@@ -35,25 +35,26 @@ public class OrdemControl {
 
     }
 
-    @GetMapping("/{id}/orderservice")
-    public String order(@PathVariable("id") Long id) {
-        return "orderservice";
+    @GetMapping("/{id}/ordemservice")
+    public String order(@PathVariable("id") Long id,Model model, @ModelAttribute("ordem") OrdemDTO ordemDTO) {
+        model.addAttribute("ordem", ordemDTO);
+        return "ordemservice";
     }
 
-    @PostMapping("/{id}/orderservice")
-    public String createOrdem(@Valid @PathVariable("id") Long id, Model model, OrdemDTO ordemDTO, ClienteDTO clienteDTO) {
+    @PostMapping("/{id}/ordemservice")
+    public String createOrdem(@Valid @PathVariable("id") Long id, Model model, @ModelAttribute("ordem") OrdemDTO ordemDTO) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
-        ClienteDTO clienteEncontrado = clienteService.findByName(clienteDTO.getNome());
+        ClienteDTO clienteEncontrado = clienteService.findByNome(ordemDTO.getCliente().getNome());
         if (clienteEncontrado == null) {
             model.addAttribute("mensagem", "Usuário não encontrado");
-            return "orderservice";
+            return "ordemservice";
         }
 
         ordemDTO.setUsuario(usuarioDTO);
         ordemDTO.setCliente(clienteEncontrado);
         ordemService.save(ordemDTO);
-        model.addAttribute("ordemDTO", ordemDTO);
-        return "orderservice";
+        model.addAttribute("ordem", ordemDTO);
+        return "ordemservice";
     }
 
     ///////////////
