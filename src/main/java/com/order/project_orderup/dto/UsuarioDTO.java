@@ -12,17 +12,17 @@ import java.util.UUID;
 @Data
 public class UsuarioDTO {
 
+    @NotBlank(message = "CPF é obrigatório")
+    @CPF(message = "CPF inválido")
+    private String cpf;
 
-    private long id;
 
     private List<Ordem> ordensServico;
 
     @NotBlank(message = "Nome é obrigatório")
     private String nome;
 
-    @NotBlank(message = "CPF é obrigatório")
-    @CPF(message = "CPF inválido")
-    private String cpf;
+
 
     @NotBlank(message = "Email é obrigatório")
     private String email;

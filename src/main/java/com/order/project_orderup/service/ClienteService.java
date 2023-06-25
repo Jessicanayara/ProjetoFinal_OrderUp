@@ -7,10 +7,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.order.project_orderup.dto.ClienteDTO;
+import com.order.project_orderup.dto.ClienteUpdateDTO;
+import com.order.project_orderup.dto.OrdemUpdateDTO;
 import com.order.project_orderup.dto.UsuarioDTO;
 import com.order.project_orderup.model.Cliente;
+import com.order.project_orderup.model.Ordem;
 import com.order.project_orderup.repository.ClienteRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -23,8 +27,10 @@ public class ClienteService {
 
 
     private ClienteRepository clienteRepository;
+
     private ModelMapper modelMapper;
-    public ClienteService(ClienteRepository clienteRepository , ModelMapper modelMapper) {
+    @Autowired
+   public ClienteService(ClienteRepository clienteRepository , ModelMapper modelMapper) {
         this.clienteRepository = clienteRepository;
         this.modelMapper = modelMapper;
     }
@@ -64,38 +70,36 @@ public class ClienteService {
     }
 
 
-    public List<ClienteDTO> lista(UsuarioDTO usuarioDTO) {
-        List<Cliente> clientes = clienteRepository.findByUsuarioId(usuarioDTO.getId());
+    public List<ClienteUpdateDTO> lista(UsuarioDTO usuarioDTO) {
+        List<Cliente> clientes = clienteRepository.findByUsuarioCpf(usuarioDTO.getCpf());
         return clientes.stream()
-                .map(cliente -> modelMapper.map(cliente, ClienteDTO.class))
+                .map(cliente -> modelMapper.map(cliente, ClienteUpdateDTO.class))
                 .collect(Collectors.toList());
     }
 
-    public ClienteDTO buscar(long id) {
+   /* public ClienteUpdateDTO buscar(long id) {
         Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Cliente não encontrado"));
-        return modelMapper.map(cliente, ClienteDTO.class);
-    }
+        return modelMapper.map(cliente, ClienteUpdateDTO.class);
+    }*/
 
-    public void atualizarCliente(Long usuarioId, Long clienteId, ClienteDTO clienteDTO) {
-        // Verificar se o cliente pertence ao usuário
-        Cliente cliente = clienteRepository.findByIdAndUsuarioId(clienteId, usuarioId);
-        if (cliente == null) {
-            throw new IllegalArgumentException("O cliente não pertence ao usuário.");
-        }
+    public void atualizarCliente(Long clienteId,String id,  ClienteUpdateDTO clienteUpdateDTO) {
 
+        Cliente cliente = clienteRepository.findByIdAndUsuarioId(clienteId,id);
 
-        cliente.setEmail(clienteDTO.getEmail());
-        cliente.setEndereco(clienteDTO.getEndereco());
-        cliente.setCidade(clienteDTO.getCidade());
-        cliente.setEstado(clienteDTO.getEstado());
+        if (clienteUpdateDTO != null){
 
-        clienteRepository.save(cliente);
+        cliente.setEmail(clienteUpdateDTO.getEmail());
+        cliente.setEndereco(clienteUpdateDTO.getEndereco());
+        cliente.setCidade(clienteUpdateDTO.getCidade());
+        cliente.setEstado(clienteUpdateDTO.getEstado());
+
+        clienteRepository.save(cliente);}
     }
 
     @Transactional
-    public void delete(long id,Long usuarioId) {
-        Cliente cliente = clienteRepository.findByIdAndUsuarioId(id, usuarioId);
+    public void delete( Long clienteId ,String id) {
+        Cliente cliente = clienteRepository.findByIdAndUsuarioId(clienteId,id);
         if (cliente == null) {
             throw new IllegalArgumentException("O cliente não pertence ao usuário.");
         }
@@ -103,11 +107,20 @@ public class ClienteService {
     }
 
 
-    public ClienteDTO findByNome(String nome) {
+    public ClienteUpdateDTO findByNome(String nome) {
         Cliente cliente = clienteRepository.findByNome(nome);
+        System.out.println("4" +nome);
         if (cliente == null) {
             return null;
         }
-        return modelMapper.map(cliente, ClienteDTO.class);
+        return modelMapper.map(cliente, ClienteUpdateDTO.class);
+    }
+
+    public ClienteUpdateDTO obtercliente( Long clienteId, String id) {
+        Cliente cliente = clienteRepository.findByIdAndUsuarioId(clienteId,id);
+        if (cliente == null) {
+            throw new IllegalArgumentException("A ordem não pertence ao usuário.");
+        }
+        return modelMapper.map(cliente, ClienteUpdateDTO.class);
     }
 }

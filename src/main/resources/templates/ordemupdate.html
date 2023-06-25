@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Atualizar Ordem</title>
+</head>
+<body>
+<h1>Atualizar Ordem</h1>
+<form th:action="@{'/' + ${id} + '/' + ${ordemid} + '/ordemupdate'}" method="post" th:object="${ordem}">
+    <div>
+        <label for="responsavel">Responsável:</label>
+        <input type="text" id="responsavel" th:field="*{responsavel}" required />
+    </div>
+    <div>
+        <label for="data">Data:</label>
+        <input type="text" id="data" th:field="*{data}" required />
+    </div>
+    <div>
+        <label for="equipamento">Equipamento:</label>
+        <input type="text" id="equipamento" th:field="*{equipamento}" />
+    </div>
+    <div>
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" th:field="*{marca}" />
+    </div>
+    <div>
+        <label for="numserie">Número de Série:</label>
+        <input type="text" id="numserie" th:field="*{numserie}" />
+    </div>
+    <div>
+        <label for="diagnostico">Diagnóstico:</label>
+        <input type="text" id="diagnostico" th:field="*{diagnostico}" />
+    </div>
+    <div>
+        <label for="pecas">Peças:</label>
+        <input type="text" id="pecas" th:field="*{pecas}" />
+    </div>
+    <div>
+        <label for="laudo">Laudo:</label>
+        <input type="text" id="laudo" th:field="*{laudo}" />
+    </div>
+    <div>
+        <label for="documento">Documento:</label>
+        <input type="text" id="documento" th:field="*{documento}" required />
+    </div>
+    <div>
+        <label for="assinatura">Assinatura:</label>
+        <input type="text" id="assinatura" th:field="*{assinatura}" required />
+    </div>
+    <button type="submit">Atualizar</button>
+</form>
+</body>
+</html>

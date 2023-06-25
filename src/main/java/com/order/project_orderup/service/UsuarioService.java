@@ -63,8 +63,8 @@ public class UsuarioService {
 
 
 
-    public UsuarioDTO buscar(long id) {
-        Usuario usuario = usuarioRepository.findById(id)
+    public UsuarioDTO buscar(String cpf) {
+        Usuario usuario = usuarioRepository.findById(cpf)
                 .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
         return modelMapper.map(usuario, UsuarioDTO.class);
     }

@@ -5,20 +5,20 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 
-import com.order.project_orderup.dto.ClienteDTO;
-import com.order.project_orderup.dto.OrdemDTO;
-import com.order.project_orderup.dto.UsuarioDTO;
+import com.order.project_orderup.dto.*;
 import com.order.project_orderup.model.Ordem;
 import com.order.project_orderup.repository.OrdemRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrdemService {
+
     private OrdemRepository ordemRepository;
     private ModelMapper modelMapper;
-
+    @Autowired
     public OrdemService(OrdemRepository ordemRepository, ModelMapper modelMapper) {
         this.ordemRepository = ordemRepository;
         this.modelMapper = modelMapper;
@@ -27,18 +27,18 @@ public class OrdemService {
     @Transactional
     public OrdemDTO save(OrdemDTO ordemDTO) {
         Ordem ordem = modelMapper.map(ordemDTO, Ordem.class);
+
         Ordem savedOrdem = ordemRepository.save(ordem);
         return modelMapper.map(savedOrdem, OrdemDTO.class);
     }
 
-    public List<OrdemDTO> lista(UsuarioDTO usuarioId) {
-        List<Ordem> ordens = ordemRepository.findByUsuarioId(usuarioId.getId());
+    public List<OrdemUpdateDTO> lista(UsuarioDTO usuarioId) {
+        List<Ordem> ordens = ordemRepository.findByUsuarioId(usuarioId.getCpf());
         return ordens.stream()
                 .map(ordem -> {
-                    OrdemDTO ordemDTO = modelMapper.map(ordem, OrdemDTO.class);
-                    ordemDTO.setCliente(modelMapper.map(ordem.getCliente(), ClienteDTO.class));
-                    ordemDTO.setId(ordem.getId());
-                    return ordemDTO;
+                    OrdemUpdateDTO ordemUpdateDTO = modelMapper.map(ordem, OrdemUpdateDTO.class);
+                    ordemUpdateDTO.setCliente(modelMapper.map(ordem.getCliente(), ClienteUpdateDTO.class));
+                    return ordemUpdateDTO;
                 })
                 .collect(Collectors.toList());
     }
@@ -46,28 +46,41 @@ public class OrdemService {
 
 
     //////////
-    public void atualizarOrdem(Long usuarioId, Long ordemId, OrdemDTO ordemDTO) {
-        // Verificar se a ordem pertence ao usuário
+    public void atualizarOrdem(String usuarioId, Long ordemId, OrdemUpdateDTO ordemUpdateDTO) {
+
         Ordem ordem = ordemRepository.findByIdAndUsuarioId(ordemId, usuarioId);
-        if (ordem == null) {
-            throw new IllegalArgumentException("A ordem não pertence ao usuário.");
+        if (ordemUpdateDTO != null){
+
+            ordem.setResponsavel(ordemUpdateDTO.getResponsavel());
+            ordem.setData(ordemUpdateDTO.getData());
+            ordem.setEquipamento(ordemUpdateDTO.getEquipamento());
+            ordem.setMarca(ordemUpdateDTO.getMarca());
+            ordem.setNumserie(ordemUpdateDTO.getNumserie());
+            ordem.setDiagnostico(ordemUpdateDTO.getDiagnostico());
+            ordem.setPecas(ordemUpdateDTO.getPecas());
+            ordem.setLaudo(ordemUpdateDTO.getLaudo());
+            ordem.setDocumento(ordemUpdateDTO.getDocumento());
+            ordem.setAssinatura(ordemUpdateDTO.getAssinatura());
+            ordemRepository.save(ordem);
+
         }
 
-        ordem.setResponsavel(ordemDTO.getResponsavel());
-        ordem.setData(ordemDTO.getData());
 
-        ordemRepository.save(ordem);
+    }
+
+    public OrdemUpdateDTO obterOrdem(String usuarioId, Long ordemId) {
+        Ordem ordem = ordemRepository.findByIdAndUsuarioId(ordemId, usuarioId);
+        return modelMapper.map(ordem, OrdemUpdateDTO.class);
+
     }
 
 
 
 
+
     @Transactional
-    public void delete(long id,Long ordemId) {
-        Ordem ordem = ordemRepository.findByIdAndUsuarioId(ordemId, id);
-        if (ordem == null) {
-            throw new IllegalArgumentException("A ordem não pertence ao usuário.");
-        }
+    public void delete(String usuarioId,Long ordemId) {
+        Ordem ordem = ordemRepository.findByIdAndUsuarioId(ordemId, usuarioId);
         ordemRepository.delete(ordem);
     }
 }

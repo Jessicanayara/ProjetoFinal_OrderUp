@@ -18,7 +18,7 @@ public class OrdemDTO {
     private String data;
 
     @NotBlank(message = "campo obrigatorio")
-    private ClienteDTO cliente;
+    private ClienteUpdateDTO cliente;
 
     private String equipamento;
 

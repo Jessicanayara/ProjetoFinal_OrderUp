@@ -18,14 +18,10 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private String cpf;
 
     @Column(length = 100)
     private String nome;
-
-    @Column(length = 100)
-    private String cpf;
 
     @Column(length = 100)
     private String email;

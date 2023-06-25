@@ -10,10 +10,10 @@ import org.hibernate.validator.constraints.br.CPF;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class ClienteDTO {
-    private long id;
+
     private List<OrdemDTO> ordensServico;
     private UsuarioDTO usuario;
 

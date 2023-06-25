@@ -14,20 +14,18 @@ import org.springframework.web.bind.annotation.*;
 
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
+    private  UsuarioService usuarioService;
 
+    private UsuarioController usuarioController;
     @Autowired
-    public UsuarioController(UsuarioService usuarioService) {
+    public UsuarioController(UsuarioController usuarioController, UsuarioService usuarioService) {
+        this.usuarioController = usuarioController;
         this.usuarioService = usuarioService;
     }
 
-   /* @GetMapping("/login")
-    public String showLoginForm() {
-        return "login";
-    }*/
 
     @GetMapping("/home")
-    public String showCadForm( Model model) {
+    public String form( Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
         return "home";
     }
@@ -39,7 +37,7 @@ public class UsuarioController {
             model.addAttribute("mensagem", "Usuário não encontrado");
             return "home";
         }
-        Long id = usuarioEncontrado.getId();
+        String id = usuarioEncontrado.getCpf();
         return "redirect:/" + id + "/perfil";
     }
 
@@ -83,7 +81,7 @@ public class UsuarioController {
 
 
     @GetMapping("/{id}/perfil")
-    public String getUsuarioById(@PathVariable("id") Long id, Model model) {
+    public String getUsuarioById(@PathVariable("id") String id, Model model) {
         UsuarioDTO usuario = usuarioService.buscar(id);
         model.addAttribute("usuario", usuario);
         return "perfil";

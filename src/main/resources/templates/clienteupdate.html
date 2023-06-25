@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cliente Update</title>
+</head>
+<body>
+<h1>Cliente Update</h1>
+<form th:action="@{'/' + ${id} + '/' + ${clienteid} + '/clienteupdate'}" method="post" th:object="${cliente}">
+    <div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" th:field="*{nome}" />
+    </div>
+    <div>
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" th:field="*{cpf}" />
+    </div>
+    <div>
+        <label for="cnpj">CNPJ:</label>
+        <input type="text" id="cnpj" th:field="*{cnpj}" />
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" id="email" th:field="*{email}" />
+    </div>
+    <div>
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" th:field="*{endereco}" />
+    </div>
+    <div>
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" th:field="*{cidade}" />
+    </div>
+    <div>
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" th:field="*{estado}" />
+    </div>
+    <button type="submit">Salvar</button>
+</form>
+</body>
+</html>

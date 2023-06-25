@@ -1,6 +1,8 @@
 package com.order.project_orderup.control;
 
 import com.order.project_orderup.dto.ClienteDTO;
+import com.order.project_orderup.dto.ClienteUpdateDTO;
+import com.order.project_orderup.dto.OrdemUpdateDTO;
 import com.order.project_orderup.dto.UsuarioDTO;
 import com.order.project_orderup.service.ClienteService;
 import com.order.project_orderup.service.UsuarioService;
@@ -18,8 +20,8 @@ import java.util.List;
 @Controller
 public class ClienteController {
 
-    private final ClienteService clienteService;
-    private final UsuarioService usuarioService;
+    private  ClienteService clienteService;
+    private  UsuarioService usuarioService;
 
     @Autowired
     public ClienteController(ClienteService clienteService, UsuarioService usuarioService) {
@@ -28,12 +30,12 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}/clienteservice")
-    public String cliente(@PathVariable("id") Long id) {
+    public String cliente(@PathVariable("id") String id) {
         return "clienteservice";
     }
 
     @PostMapping("/{id}/clienteservice")
-    public String createCliente( @PathVariable("id") Long id, @Valid @ModelAttribute ClienteDTO clienteDTO, BindingResult bindingResult, Model model) {
+    public String createCliente( @PathVariable("id") String id, @Valid @ModelAttribute ClienteDTO clienteDTO, BindingResult bindingResult, Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
 
 
@@ -75,25 +77,33 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}/clientelist")
-    public String getAllClientes(@PathVariable("id") Long id, Model model) {
+    public String getAllClientes(@PathVariable("id") String id, Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
-        List<ClienteDTO> clientesDTO = clienteService.lista(usuarioDTO);
+        List<ClienteUpdateDTO> clientesDTO = clienteService.lista(usuarioDTO);
         model.addAttribute("clientes", clientesDTO);
         return "clientelist";
     }
 
 ////testar
-    @PutMapping("/{id}/{cliente_id}/update")
-    public String updateCliente(@PathVariable("id") Long id, @PathVariable("cliente_id") Long clienteId, ClienteDTO clienteDTO) {
+    @PostMapping("/{id}/{clienteid}/clienteupdate")
+    public String updateCliente(@PathVariable("id") String id, @PathVariable("clienteid") Long clienteId, @ModelAttribute("cliente") ClienteUpdateDTO clienteUpdateDTO) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
-        clienteDTO.setUsuario(usuarioDTO);
-        clienteService.atualizarCliente(id, clienteId, clienteDTO);
-        return "";
+        clienteUpdateDTO.setUsuario(usuarioDTO);
+        clienteService.atualizarCliente( clienteId, id,  clienteUpdateDTO);
+        return "clienteupdate";
     }
 
+    @GetMapping("/{id}/{clienteid}/clienteupdate")
+    public String viewcliente(@PathVariable("id") String id, @PathVariable("clienteid") Long clienteId, Model model) {
+        ClienteUpdateDTO clienteUpdateDTO = clienteService.obtercliente(clienteId,id);
+        model.addAttribute("cliente", clienteUpdateDTO);
+        return "clienteupdate";
+    }
+
+
     @DeleteMapping("/{id}/{cliente_id}/delete")
-    public String deleteClienteById(@PathVariable("id") Long id, @PathVariable("cliente_id") long clienteId) {
-        clienteService.delete(id,clienteId);
+    public String deleteClienteById(@PathVariable("id") String id, @PathVariable("cliente_id") long clienteId) {
+        clienteService.delete(clienteId, id);
         return "";
     }
 
