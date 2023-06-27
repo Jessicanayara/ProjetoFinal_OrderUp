@@ -33,7 +33,7 @@ public class OrdemService {
     }
 
     public List<OrdemUpdateDTO> lista(UsuarioDTO usuarioId) {
-        List<Ordem> ordens = ordemRepository.findByUsuarioId(usuarioId.getCpf());
+        List<Ordem> ordens = ordemRepository.findByUsuarioCpf(usuarioId.getCpf());
         return ordens.stream()
                 .map(ordem -> {
                     OrdemUpdateDTO ordemUpdateDTO = modelMapper.map(ordem, OrdemUpdateDTO.class);
@@ -48,7 +48,7 @@ public class OrdemService {
     //////////
     public void atualizarOrdem(String usuarioId, Long ordemId, OrdemUpdateDTO ordemUpdateDTO) {
 
-        Ordem ordem = ordemRepository.findByIdAndUsuarioId(ordemId, usuarioId);
+        Ordem ordem = ordemRepository.findByIdAndUsuarioCpf(ordemId, usuarioId);
         if (ordemUpdateDTO != null){
 
             ordem.setResponsavel(ordemUpdateDTO.getResponsavel());
@@ -69,7 +69,7 @@ public class OrdemService {
     }
 
     public OrdemUpdateDTO obterOrdem(String usuarioId, Long ordemId) {
-        Ordem ordem = ordemRepository.findByIdAndUsuarioId(ordemId, usuarioId);
+        Ordem ordem = ordemRepository.findByIdAndUsuarioCpf(ordemId, usuarioId);
         return modelMapper.map(ordem, OrdemUpdateDTO.class);
 
     }
@@ -80,7 +80,7 @@ public class OrdemService {
 
     @Transactional
     public void delete(String usuarioId,Long ordemId) {
-        Ordem ordem = ordemRepository.findByIdAndUsuarioId(ordemId, usuarioId);
+        Ordem ordem = ordemRepository.findByIdAndUsuarioCpf(ordemId, usuarioId);
         ordemRepository.delete(ordem);
     }
 }

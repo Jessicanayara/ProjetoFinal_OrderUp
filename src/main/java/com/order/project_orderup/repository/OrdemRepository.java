@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface OrdemRepository extends JpaRepository<Ordem, Long> {
-    List<Ordem> findByUsuarioId(String usuarioId);
+    List<Ordem> findByUsuarioCpf(String usuarioId);
 
 
 
-    Ordem findByIdAndUsuarioId(Long ordemId, String usuarioId);
+    Ordem findByIdAndUsuarioCpf(Long ordemId, String usuarioId);
 }

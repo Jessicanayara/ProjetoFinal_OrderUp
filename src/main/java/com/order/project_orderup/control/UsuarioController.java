@@ -16,10 +16,10 @@ public class UsuarioController {
 
     private  UsuarioService usuarioService;
 
-    private UsuarioController usuarioController;
+
     @Autowired
-    public UsuarioController(UsuarioController usuarioController, UsuarioService usuarioService) {
-        this.usuarioController = usuarioController;
+    public UsuarioController( UsuarioService usuarioService) {
+
         this.usuarioService = usuarioService;
     }
 

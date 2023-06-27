@@ -14,13 +14,13 @@ public class ClienteUpdateDTO {
 
     private UsuarioDTO usuario;
 
-
+    @NotBlank(message = "Nome é obrigatorio")
     private String nome;
-
+    @CPF(message = "CPF invalido")
     private String cpf;
-
+    @CNPJ(message = "CNPJ invalido")
     private String cnpj;
-
+    @NotBlank(message = "Email é obrigatorio")
     private String email;
 
     private String endereco;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Toolbar</title>
+    <title>Ordem de serviço</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" type="text/css" href="../style.css">
@@ -9,30 +9,7 @@
 </head>
 <body>
 
-<div class="toolbar">
-    <nav class="navbar navbar-expand-lg custom-navbar">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">OrderUp</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="perfil.html">Perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Ordem de serviço</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home.html">Armazenamento</a>
-                    </li>
-                </ul>
-                <button class="btn btn-outline-success" type="submit">Sair</button>
-            </div>
-        </div>
-    </nav>
-</div>
+<div th:replace="~{toolbar.html}"></div>
 
 <form th:action="@{'/' + ${id} + '/ordemservice'}" method="post" th:object="${ordem}">
     <div class="card-container">

@@ -2,7 +2,7 @@ html,
 body {
     min-height: 100%;
     margin: 0;
-    background-color: #6FCF97;
+    background-color:#69F0AE;
 }
 
 .card{
@@ -10,12 +10,12 @@ body {
 }
 
 .custom-navbar {
-    background-color: #6FCF97; /* Cor personalizada */
+    background-color: #69F0AE;/* Cor personalizada */
 }
 
 .card-container{
 
-    background-color: #6FCF97;
+    background-color: #69F0AE;
     padding: 50px;
 
 

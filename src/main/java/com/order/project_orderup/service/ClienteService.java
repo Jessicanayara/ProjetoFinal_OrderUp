@@ -85,7 +85,7 @@ public class ClienteService {
 
     public void atualizarCliente(Long clienteId,String id,  ClienteUpdateDTO clienteUpdateDTO) {
 
-        Cliente cliente = clienteRepository.findByIdAndUsuarioId(clienteId,id);
+        Cliente cliente = clienteRepository.findByIdAndUsuarioCpf(clienteId,id);
 
         if (clienteUpdateDTO != null){
 
@@ -99,7 +99,7 @@ public class ClienteService {
 
     @Transactional
     public void delete( Long clienteId ,String id) {
-        Cliente cliente = clienteRepository.findByIdAndUsuarioId(clienteId,id);
+        Cliente cliente = clienteRepository.findByIdAndUsuarioCpf(clienteId,id);
         if (cliente == null) {
             throw new IllegalArgumentException("O cliente não pertence ao usuário.");
         }
@@ -117,7 +117,7 @@ public class ClienteService {
     }
 
     public ClienteUpdateDTO obtercliente( Long clienteId, String id) {
-        Cliente cliente = clienteRepository.findByIdAndUsuarioId(clienteId,id);
+        Cliente cliente = clienteRepository.findByIdAndUsuarioCpf(clienteId,id);
         if (cliente == null) {
             throw new IllegalArgumentException("A ordem não pertence ao usuário.");
         }

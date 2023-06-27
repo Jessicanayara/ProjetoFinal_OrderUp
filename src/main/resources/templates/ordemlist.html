@@ -28,12 +28,15 @@
             <button type="submit">Editar</button>
         </form></td>
 
-        <div th:if="${mensagemErro}" class="error-message">
-            <span th:text="${mensagemErro}"></span>
-        </div>
+
 
     </tr>
+
+
     </tbody>
 </table>
+<div th:if="${mensagemErro}" class="error-message">
+    <span th:text="${mensagemErro}"></span>
+</div>
 </body>
 </html>

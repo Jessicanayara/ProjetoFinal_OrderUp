@@ -43,7 +43,7 @@ public class OrdemControl {
     }
 
     @PostMapping("/{id}/ordemservice")
-    public String createOrdem(@Valid @PathVariable("id") String id, BindingResult bindingResult, Model model, OrdemDTO ordemDTO) {
+    public String createOrdem(@Valid @ModelAttribute("ordem") OrdemDTO ordemDTO, BindingResult bindingResult, @PathVariable("id") String id, Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
 
         ClienteUpdateDTO clienteEncontrado = clienteService.findByNome(ordemDTO.getCliente().getNome());
@@ -76,7 +76,7 @@ public class OrdemControl {
 
         List<OrdemUpdateDTO> ordensDTO = ordemService.lista(usuarioDTO);
         if (ordensDTO.isEmpty()) {
-
+            System.out.println("entrou no empty");
             model.addAttribute("mensagemErro", "Nenhuma ordem encontrada");
             return "ordemlist";
         }
