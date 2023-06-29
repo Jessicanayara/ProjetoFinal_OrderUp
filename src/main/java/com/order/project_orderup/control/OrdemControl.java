@@ -10,6 +10,7 @@ import com.order.project_orderup.service.OrdemService;
 import com.order.project_orderup.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -95,6 +96,12 @@ public class OrdemControl {
         ordemUpdateDTO.setUsuario(usuarioDTO);
         ordemService.atualizarOrdem(id, ordemId, ordemUpdateDTO);
         return "redirect:/" + id + "/ordemlist";
+    }
+
+    @GetMapping("/{id}/buscar-cliente")
+    public ResponseEntity<List<ClienteUpdateDTO>> buscarCliente(@PathVariable("id") String id) {
+        List<ClienteUpdateDTO> clientesEncontrados = clienteService.buscarPorUsuario(id);
+        return ResponseEntity.ok(clientesEncontrados);
     }
 
    @GetMapping("/{id}/{ordemid}/ordemupdate")

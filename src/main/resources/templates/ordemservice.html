@@ -32,13 +32,18 @@
                             </div>
                             <div class="col-md">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="cliente" th:field="*{cliente.nome}" th:autocomplete="off">
+                                    <input type="text" class="form-control" id="cliente" th:field="*{cliente.nome}" th:autocomplete="off" oninput="buscarClientes(this.value)">
                                     <label for="cliente">Cliente:</label>
                                     <input type="hidden" th:field="*{cliente.id}">
                                     <div th:if="${#fields.hasErrors('cliente.nome')}">
                                         <span th:errors="*{cliente.nome}"></span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="autocomplete" th:fragment="autocomplete">
+                                <ul id="cliente-list">
+                                    <li th:each="cliente : ${clientes}" th:text="${cliente.nome}" onclick="selecionarCliente('${cliente.id}', '${cliente.nome}')"></li>
+                                </ul>
                             </div>
                             <div class="col-md">
                                 <button type="button" class="btn btn-outline-secondary btn-lg">Novo cliente</button>
@@ -146,6 +151,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-krG/EitM2Bw5ft7ujZ/zqJOT3iCfo1tTQaHFs0fJ3tZ3f7Rwo1syyD/j/6HhHixB" crossorigin="anonymous"></script>
+<script src="http://localhost:8080/../script.js"></script>
 
 </body>
 </html>

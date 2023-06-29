@@ -1,6 +1,7 @@
 package com.order.project_orderup.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -115,6 +116,16 @@ public class ClienteService {
         }
         return modelMapper.map(cliente, ClienteUpdateDTO.class);
     }
+
+
+    public List<ClienteUpdateDTO> buscarPorUsuario(String idUsuario) {
+        System.out.println(idUsuario);
+        List<Cliente> clientes = clienteRepository.findByUsuarioCpf(idUsuario);
+        return clientes.stream()
+                .map(cliente -> modelMapper.map(cliente, ClienteUpdateDTO.class))
+                .collect(Collectors.toList());
+    }
+
 
     public ClienteUpdateDTO obtercliente( Long clienteId, String id) {
         Cliente cliente = clienteRepository.findByIdAndUsuarioCpf(clienteId,id);
