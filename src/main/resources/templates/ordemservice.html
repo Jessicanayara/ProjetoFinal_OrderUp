@@ -11,7 +11,7 @@
 
 <div th:replace="~{toolbar.html}"></div>
 
-<form th:action="@{'/' + ${id} + '/ordemservice'}" method="post" th:object="${ordem}">
+<form th:action="@{'/' + ${id} + '/ordemservice'}" method="post" th:object="${ordem}" id="formulario">
     <div class="card-container">
         <div class="card">
             <div class="card-body">
@@ -38,13 +38,15 @@
                                     <div th:if="${#fields.hasErrors('cliente.nome')}">
                                         <span th:errors="*{cliente.nome}"></span>
                                     </div>
+                                    <div class="autocomplete" th:fragment="autocomplete">
+                                        <ul id="cliente-list" class="list-group">
+                                            <li th:each="cliente : ${clientes}" th:text="${cliente.nome}" onclick="selecionarCliente('${cliente.id}', '${cliente.nome}')"></li>
+                                        </ul>
+                                    </div>
                                 </div>
+
                             </div>
-                            <div class="autocomplete" th:fragment="autocomplete">
-                                <ul id="cliente-list">
-                                    <li th:each="cliente : ${clientes}" th:text="${cliente.nome}" onclick="selecionarCliente('${cliente.id}', '${cliente.nome}')"></li>
-                                </ul>
-                            </div>
+
                             <div class="col-md">
                                 <button type="button" class="btn btn-outline-secondary btn-lg">Novo cliente</button>
                             </div>
@@ -130,7 +132,7 @@
                 <div class="container text-center">
                     <div class="row justify-content-md-center">
                         <div class="col col-lg-2">
-                            <button type="button" class="btn btn-outline-success">Limpar</button>
+                            <button type="button" class="btn btn-outline-success" id="del">Limpar</button>
                         </div>
                         <div class="col-md-auto">
                             <span></span>

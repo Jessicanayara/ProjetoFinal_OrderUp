@@ -30,10 +30,12 @@ function exibirClientes(clientes) {
     clienteList.innerHTML = '';
 
     if (clientes.length > 0) {
-        clientes.forEach(function(cliente) {
+        clientes.forEach(function (cliente) {
             var li = document.createElement('li');
             li.textContent = cliente.nome;
-            li.addEventListener('click', function() {
+            li.classList.add('list-group-item');
+
+            li.addEventListener('click', function () {
                 selecionarCliente(cliente.id, cliente.nome);
             });
 
@@ -42,14 +44,24 @@ function exibirClientes(clientes) {
     } else {
         var li = document.createElement('li');
         li.textContent = 'Nenhum cliente encontrado';
-        li.classList.add('disabled');
+        li.classList.add('list-group-item', 'disabled');
 
         clienteList.appendChild(li);
     }
 }
-
 function selecionarCliente(clienteId, clienteNome) {
     clienteInput.value = clienteNome;
     clienteIdInput.value = clienteId;
     clienteList.innerHTML = '';
 }
+
+
+
+const botaoLimpar = document.getElementById("del");
+
+let form = document.getElementById('formulario');
+
+// Adicione um evento de clique ao botão de limpar
+botaoLimpar.addEventListener("click", function() {
+    form.reset();
+});

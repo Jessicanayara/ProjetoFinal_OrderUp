@@ -58,6 +58,9 @@ span{
 
 .card-section {
     height: 100vh;
+    background-image: url('imagens/backgroundUp.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .card-section .card {
@@ -71,3 +74,4 @@ span{
 
     display: none;
 }
+

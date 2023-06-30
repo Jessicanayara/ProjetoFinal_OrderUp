@@ -1,42 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Lista de Ordens</title>
+    <title>Armazenamento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
 </head>
 <body>
-<h1>Lista de Ordens</h1>
-<table>
-    <thead>
-    <tr>
+<div th:replace="~{toolbar.html}"></div>
 
-        <th>Responsável</th>
-        <th>Data</th>
-
-    </tr>
-    </thead>
-    <tbody>
-
-    <tr th:each="ordem : ${ordem}">
-        <td th:text="${ordem.id}"></td>
-        <td th:text="${ordem.data}"></td>
-        <td th:text="${ordem.cliente.nome}"></td>
-        <td><form th:action="@{'/' + ${id} + '/' + ${ordem.id} + '/deleteorder'}" method="get">
-            <button type="submit">Excluir</button>
-        </form></td>
-        <td><form th:action="@{'/' + ${id} + '/' + ${ordem.id} + '/ordemupdate'}" method="get">
-            <button type="submit">Editar</button>
-        </form></td>
+<div class="card-container">
+    <div class="card" >
+        <div class="card-body">
 
 
+            <div class="card" id="AM">
+                <div class="card-body">
 
-    </tr>
+                    <table class="table table-hover">
+
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Cliente</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="ordem : ${ordem}">
+                            <td th:text="${ordem.id}"></td>
+                            <td th:text="${ordem.data}"></td>
+                            <td th:text="${ordem.cliente.nome}"></td>
+
+                            <td><form th:action="@{'/' + ${id} + '/' + ${ordem.id} + '/deleteorder'}" method="get">
+                                <button class="btn btn-warning" type="submit">Excluir</button>
+                            </form></td>
+                            <td><form th:action="@{'/' + ${id} + '/' + ${ordem.id} + '/ordemupdate'}" method="get">
+                                <button class="btn btn-sucess" type="submit">Editar</button>
+                            </form></td>
+                        </tr>
 
 
-    </tbody>
-</table>
-<div th:if="${mensagemErro}" class="error-message">
-    <span th:text="${mensagemErro}"></span>
+                        </tbody>
+
+                    </table>
+
+                    <div th:if="${mensagemErro}" class="error-message">
+                        <span th:text="${mensagemErro}"></span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
 </div>
+
+
+
+
 </body>
 </html>
