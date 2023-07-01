@@ -116,7 +116,7 @@ public class OrdemControl {
     public String deleteOrdemById(@PathVariable("id") String id,@PathVariable("ordemid") Long ordemId) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
         ordemService.delete(id,ordemId);
-        return "redirect:/" + usuarioDTO + "/ordemlist";
+        return "redirect:/" + id + "/ordemlist";
     }
 
 

@@ -30,12 +30,13 @@ public class ClienteController {
     }
 
     @GetMapping("/{id}/clienteservice")
-    public String cliente(@PathVariable("id") String id) {
+    public String cliente(@PathVariable("id") String id,Model model, @ModelAttribute("cliente") ClienteDTO clienteDTO) {
+        model.addAttribute("cliente", clienteDTO);
         return "clienteservice";
     }
 
     @PostMapping("/{id}/clienteservice")
-    public String createCliente( @PathVariable("id") String id, @Valid @ModelAttribute ClienteDTO clienteDTO, BindingResult bindingResult, Model model) {
+    public String createCliente( @PathVariable("id") String id, @Valid @ModelAttribute("cliente") ClienteDTO clienteDTO, BindingResult bindingResult, Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
 
 
@@ -49,27 +50,27 @@ public class ClienteController {
         ClienteDTO clienteCpf= clienteService.findByCpf(clienteDTO.getCpf());
         if (clienteCpf != null) {
             model.addAttribute("mensagemErro", "Este cliente já existe");
-            model.addAttribute("id", id);
+
             return "clienteservice";
         }
 
         ClienteDTO clienteCNPJ= clienteService.findByCnpj(clienteDTO.getCnpj());
         if (clienteCNPJ != null) {
             model.addAttribute("mensagemErro", "Este cliente já existe");
-            model.addAttribute("id", id);
+
             return "clienteservice";
         }
 
         try {
             clienteDTO.setUsuario(usuarioDTO);
             clienteService.save(clienteDTO);
-            model.addAttribute("clienteDTO", clienteDTO);
+            model.addAttribute("cliente", clienteDTO);
             model.addAttribute("mensagemSucesso", "Cliente cadastrado com sucesso!");
             return "clientelist";
 
         } catch (IllegalArgumentException e) {
             model.addAttribute("mensagemErro", "Cliente não cadastrado. " + e.getMessage());
-            model.addAttribute("id", id);
+
             return "clienteservice";
         }
 
@@ -80,7 +81,7 @@ public class ClienteController {
     public String getAllClientes(@PathVariable("id") String id, Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
         List<ClienteUpdateDTO> clientesDTO = clienteService.lista(usuarioDTO);
-        model.addAttribute("clientes", clientesDTO);
+        model.addAttribute("cliente", clientesDTO);
         return "clientelist";
     }
 
@@ -101,10 +102,10 @@ public class ClienteController {
     }
 
 
-    @DeleteMapping("/{id}/{cliente_id}/delete")
+    @GetMapping("/{id}/{cliente_id}/delete")
     public String deleteClienteById(@PathVariable("id") String id, @PathVariable("cliente_id") long clienteId) {
         clienteService.delete(clienteId, id);
-        return "";
+        return "redirect:/" + id + "/clientelist";
     }
 
 }

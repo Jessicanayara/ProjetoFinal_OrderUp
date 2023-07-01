@@ -34,8 +34,8 @@
                             <td th:text="${ordem.data}"></td>
                             <td th:text="${ordem.cliente.nome}"></td>
 
-                            <td><form th:action="@{'/' + ${id} + '/' + ${ordem.id} + '/deleteorder'}" method="get">
-                                <button class="btn btn-warning" type="submit">Excluir</button>
+                            <td><form th:action="@{'/' + ${id} + '/' + ${ordem.id} + '/deleteorder'}" method="get" id="form-excluir">
+                                <button class="btn btn-warning"  onclick="excluirOrdem()">Excluir</button>
                             </form></td>
                             <td><form th:action="@{'/' + ${id} + '/' + ${ordem.id} + '/ordemupdate'}" method="get">
                                 <button class="btn btn-sucess" type="submit">Editar</button>
@@ -63,6 +63,6 @@
 
 
 
-
+<script src="http://localhost:8080/../list.js"></script>
 </body>
 </html>
