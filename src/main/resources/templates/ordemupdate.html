@@ -13,7 +13,7 @@
 <div th:replace="~{toolbar.html}"></div>
 
 
-            <form th:action="@{'/' + ${id} + '/' + ${ordemid} + '/ordemupdate'}" method="post" th:object="${ordem}" id="formulario">
+            <form th:action="@{'/' + ${id} + '/' + ${ordemid} + '/ordemupdate'}" method="post" th:object="${ordem}" id="formordemupdate">
                 <div class="card-container">
                     <div class="card">
                         <div class="card-body">
@@ -94,7 +94,7 @@
                 <div class="container text-center">
                     <div class="row justify-content-md-center">
                         <div class="col col-lg-2">
-                            <button type="button" class="btn btn-outline-success" id="del">Limpar</button>
+                            <button type="button" class="btn btn-outline-success" id="voltarordem">Voltar</button>
                         </div>
                         <div class="col-md-auto">
                             <span></span>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
             </form>
-<script src="http://localhost:8080/../list.js"></script>
+<script src="http://localhost:8080/../update.js"></script>
 
 </body>
 </html>

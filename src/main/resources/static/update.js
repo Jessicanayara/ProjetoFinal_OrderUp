@@ -1,35 +1,43 @@
+const toolbarLinks = document.querySelectorAll('.toolbar a.nav-link');
+const formcliente = document.getElementById('formclienteupdate');
+const formordem = document.getElementById('formordemupdate');
+const voltarordem = document.getElementById('voltarordem');
+const voltarcliente = document.getElementById('voltarcliente');
 
-document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("dentro")
-
-    const toolbarLinks = document.querySelectorAll(".toolbar-link");
-
-
-    toolbarLinks.forEach(function (link) {
-        link.setAttribute("disabled", "disabled");
-        link.style.pointerEvents = "none";
-        link.style.cursor = "default";
+toolbarLinks.forEach(link => {
+    link.addEventListener('click', event => {
+        event.preventDefault();
+        alert('Você não pode sair desta página. Salve suas alterações antes de sair.');
     });
+});
 
+function redirecionarcliente() {
+    let url = window.location.href;
+    let userId = url.split('/').slice(-2)[0];
+    alert("Campos editados com sucesso!");
+    window.location.href = "/"+userId+"/clientelist";
+}
 
-    function habilitarLinksToolbar() {
-        toolbarLinks.forEach(function (link) {
-            link.removeAttribute("disabled");
-            link.style.pointerEvents = "auto";
-            link.style.cursor = "pointer";
-        });
-    }
+formcliente.addEventListener("submit", redirecionarcliente);
 
+function redirecionarordem() {
+    let url = window.location.href;
+    let userId = url.split('/').slice(-2)[0];
+    alert("Campos editados com sucesso!");
+    window.location.href = "/"+userId+"/ordemlist";
+}
 
-    const formulario = document.querySelector("form");
-    formulario.addEventListener("submit", function () {
-        habilitarLinksToolbar();
-    });
+formordem.addEventListener("submit", redirecionarordem);
 
+voltarordem.addEventListener("click", () => {
+    let url = window.location.href;
+    let userId = url.split('/').slice(-2)[0];
+    window.location.href ="/"+userId+"/ordemlist";
+});
 
-    const botaoLimpar = document.getElementById("del");
-    botaoLimpar.addEventListener("click", function () {
-        habilitarLinksToolbar();
-    });
+voltarcliente.addEventListener("click", () => {
+    let url = window.location.href;
+    let userId = url.split('/').slice(-2)[0];
+    window.location.href = "/"+userId+"/clientelist";
 });

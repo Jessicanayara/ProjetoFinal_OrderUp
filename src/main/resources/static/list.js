@@ -14,12 +14,3 @@ botaoLimpar.addEventListener("click", function() {
     form.reset();
 });
 
-function exibirAlertaRedirecionar() {
-    var url = window.location.href;
-    var userId = url.split('/').slice(-2)[0];
-    alert("Campos editados com sucesso!");
-    window.location.href = "/"+userId+"/ordemlist";
-}
-
-
-form.addEventListener("submit", exibirAlertaRedirecionar);
