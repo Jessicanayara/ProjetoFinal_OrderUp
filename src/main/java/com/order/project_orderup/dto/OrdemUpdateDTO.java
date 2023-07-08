@@ -11,6 +11,7 @@ public class OrdemUpdateDTO {
 
     private UsuarioDTO usuario;
 
+    private Integer numeroOrdem;
 
     @NotBlank(message = "campo obrigatorio")
     private String responsavel;

@@ -31,16 +31,19 @@
                         </thead>
                         <tbody>
                         <tr th:each="cliente : ${cliente}">
-                            <td th:text="${cliente.id}"></td>
-                            <td th:text="${cliente.nome}"></td>
+                            <td th:text="${cliente.numeroCliente}"></td>
+                            <td th:text="${cliente.nome} "  class="cliente-nome"></td>
                             <td th:text="${cliente.email}"></td>
 
-                            <td><form th:action="@{'/' + ${id} + '/' + ${cliente.id} + '/delete'}" method="get" id="form-excluir">
-                                <button class="btn btn-warning"  onclick="excluirOrdem()">Excluir</button>
-                            </form></td>
+                            <td><form th:action="@{'/' + ${id} + '/' + ${cliente.id} + '/delete'}" method="post" id="form-excluir">
+                                <button class="btn btn-warning"  onclick="excluirOrdem(event)">Excluir</button>
+                            </form>
+                            </td>
+
                             <td><form th:action="@{'/' + ${id} + '/' + ${cliente.id} + '/clienteupdate'}" method="get">
-                                <button class="btn btn-sucess" type="submit">Editar</button>
+                                <button class="btn btn-outline-dark" type="submit">Editar</button>
                             </form></td>
+
                         </tr>
 
 

@@ -14,7 +14,7 @@
 
 
 
-<form th:action="@{'/' + ${id} + '/clienteservice'}" method="post" th:object="${cliente}">
+<form th:action="@{'/' + ${id} + '/clienteservice'}" method="post" th:object="${cliente}" id="formservice">
 
     <div class="card-container">
         <div class="card">
@@ -76,7 +76,7 @@
                         <div class="container text-center">
                             <div class="row justify-content-md-center">
                                 <div class="col col-lg-2">
-                                    <button type="button" class="btn btn-outline-success" id="del">Limpar</button>
+                                    <button type="button" class="btn btn-outline-success" id="del" onclick="limpar()">Limpar</button>
                                 </div>
                                 <div class="col-md-auto">
                                     <span></span>
@@ -100,6 +100,6 @@
     </div>
 
 </form>
-
+<script src="http://localhost:8080/../list.js"></script>
 </body>
 </html>

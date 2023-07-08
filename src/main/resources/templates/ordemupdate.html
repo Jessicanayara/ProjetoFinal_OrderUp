@@ -13,7 +13,7 @@
 <div th:replace="~{toolbar.html}"></div>
 
 
-            <form th:action="@{'/' + ${id} + '/' + ${ordemid} + '/ordemupdate'}" method="post" th:object="${ordem}" id="formordemupdate">
+            <form th:action="@{'/' + ${id} + '/' + ${ordemid} + '/ordemupdate'}" method="post" th:object="${ordem}" id="formo">
                 <div class="card-container">
                     <div class="card">
                         <div class="card-body">
@@ -94,13 +94,13 @@
                 <div class="container text-center">
                     <div class="row justify-content-md-center">
                         <div class="col col-lg-2">
-                            <button type="button" class="btn btn-outline-success" id="voltarordem">Voltar</button>
+                            <button type="button" class="btn btn-outline-success" id="voltaro" onclick="voltarordem()">Voltar</button>
                         </div>
                         <div class="col-md-auto">
                             <span></span>
                         </div>
                         <div class="col col-lg-2">
-                            <button type="submit" class="btn btn-success">Salvar</button>
+                            <button type="submit" class="btn btn-success" onclick="redirecionarordem()">Salvar</button>
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,7 @@ public class ClienteDTO {
 
     private List<OrdemDTO> ordensServico;
     private UsuarioDTO usuario;
-
+    private Integer numeroCliente;
     @NotBlank(message = "Nome é obrigatorio")
     private String nome;
     @CPF(message = "CPF invalido")

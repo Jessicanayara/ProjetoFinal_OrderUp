@@ -47,10 +47,19 @@ public class ClienteService {
         if (clienteCNPJ != null) {
             throw new IllegalArgumentException("Usuário já existe com este CPF");
         }
+        // Obter o último número de cliente do usuário
+        Integer ultimoNumeroCliente = clienteRepository.findMaxNumeroClienteByUsuario(clienteDTO.getUsuario().getCpf());
+
+        // Incrementar para obter o próximo número sequencial
+        Integer proximoNumeroCliente = ultimoNumeroCliente != null ? ultimoNumeroCliente + 1 : 1;
 
         Cliente cliente = modelMapper.map(clienteDTO, Cliente.class);
+        cliente.setNumeroCliente(proximoNumeroCliente);
+
         Cliente savedCliente = clienteRepository.save(cliente);
         return modelMapper.map(savedCliente, ClienteDTO.class);
+
+
     }
 
     public ClienteDTO findByCnpj(String cnpj) {
@@ -78,11 +87,7 @@ public class ClienteService {
                 .collect(Collectors.toList());
     }
 
-   /* public ClienteUpdateDTO buscar(long id) {
-        Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Cliente não encontrado"));
-        return modelMapper.map(cliente, ClienteUpdateDTO.class);
-    }*/
+
 
     public void atualizarCliente(Long clienteId,String id,  ClienteUpdateDTO clienteUpdateDTO) {
 
@@ -108,9 +113,9 @@ public class ClienteService {
     }
 
 
-    public ClienteUpdateDTO findByNome(String nome) {
-        Cliente cliente = clienteRepository.findByNome(nome);
-        System.out.println("4" +nome);
+    public ClienteUpdateDTO findByNomeAndUsuarioCpf(String nome, String id) {
+        Cliente cliente = clienteRepository.findByNomeAndUsuarioCpf(nome, id);
+        System.out.println(nome);
         if (cliente == null) {
             return null;
         }
@@ -118,13 +123,7 @@ public class ClienteService {
     }
 
 
-    public List<ClienteUpdateDTO> buscarPorUsuario(String idUsuario) {
-        System.out.println(idUsuario);
-        List<Cliente> clientes = clienteRepository.findByUsuarioCpf(idUsuario);
-        return clientes.stream()
-                .map(cliente -> modelMapper.map(cliente, ClienteUpdateDTO.class))
-                .collect(Collectors.toList());
-    }
+
 
 
     public ClienteUpdateDTO obtercliente( Long clienteId, String id) {

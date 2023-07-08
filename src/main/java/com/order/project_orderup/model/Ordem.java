@@ -28,6 +28,9 @@ class Ordem{
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    @Column
+    private Integer numeroOrdem;
+
     @Column(length = 100)
     private String responsavel;
 

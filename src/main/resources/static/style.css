@@ -29,6 +29,10 @@ body {
 
 }
 
+.modal{
+    display: none;
+}
+
 
 #os{
     background-color: #e7e8e8;

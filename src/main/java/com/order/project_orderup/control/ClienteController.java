@@ -66,7 +66,7 @@ public class ClienteController {
             clienteService.save(clienteDTO);
             model.addAttribute("cliente", clienteDTO);
             model.addAttribute("mensagemSucesso", "Cliente cadastrado com sucesso!");
-            return "clientelist";
+            return "redirect:/" + id + "/clientelist";
 
         } catch (IllegalArgumentException e) {
             model.addAttribute("mensagemErro", "Cliente não cadastrado. " + e.getMessage());
@@ -81,11 +81,16 @@ public class ClienteController {
     public String getAllClientes(@PathVariable("id") String id, Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
         List<ClienteUpdateDTO> clientesDTO = clienteService.lista(usuarioDTO);
+        if (clientesDTO.isEmpty()) {
+
+            model.addAttribute("mensagemErro", "Nenhuma cliente encontrado");
+            return "clientelist";
+        }
         model.addAttribute("cliente", clientesDTO);
         return "clientelist";
     }
 
-////testar
+
     @PostMapping("/{id}/{clienteid}/clienteupdate")
     public String updateCliente(@PathVariable("id") String id, @PathVariable("clienteid") Long clienteId, @ModelAttribute("cliente") ClienteUpdateDTO clienteUpdateDTO) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
@@ -102,7 +107,7 @@ public class ClienteController {
     }
 
 
-    @GetMapping("/{id}/{cliente_id}/delete")
+    @PostMapping("/{id}/{cliente_id}/delete")
     public String deleteClienteById(@PathVariable("id") String id, @PathVariable("cliente_id") long clienteId) {
         clienteService.delete(clienteId, id);
         return "redirect:/" + id + "/clientelist";

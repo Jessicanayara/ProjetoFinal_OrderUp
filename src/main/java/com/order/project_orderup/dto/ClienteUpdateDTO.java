@@ -14,6 +14,8 @@ public class ClienteUpdateDTO {
 
     private UsuarioDTO usuario;
 
+    private Integer numeroCliente;
+
     @NotBlank(message = "Nome é obrigatorio")
     private String nome;
     @CPF(message = "CPF invalido")

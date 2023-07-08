@@ -18,18 +18,31 @@ public class OrdemService {
 
     private OrdemRepository ordemRepository;
     private ModelMapper modelMapper;
+
+    private ClienteService clienteService;
+
     @Autowired
-    public OrdemService(OrdemRepository ordemRepository, ModelMapper modelMapper) {
+    public OrdemService(OrdemRepository ordemRepository, ModelMapper modelMapper, ClienteService clienteService) {
         this.ordemRepository = ordemRepository;
         this.modelMapper = modelMapper;
+        this.clienteService = clienteService;
     }
 
     @Transactional
     public OrdemDTO save(OrdemDTO ordemDTO) {
         Ordem ordem = modelMapper.map(ordemDTO, Ordem.class);
 
+
+        Integer ultimoNumeroOrdem = ordemRepository.findMaxNumeroOrdemByUsuario(ordemDTO.getUsuario().getCpf());
+
+
+        Integer proximoNumeroOrdem = ultimoNumeroOrdem != null ? ultimoNumeroOrdem + 1 : 1;
+        ordem.setNumeroOrdem(proximoNumeroOrdem);
+
+
         Ordem savedOrdem = ordemRepository.save(ordem);
         return modelMapper.map(savedOrdem, OrdemDTO.class);
+
     }
 
     public List<OrdemUpdateDTO> lista(UsuarioDTO usuarioId) {
@@ -42,6 +55,8 @@ public class OrdemService {
                 })
                 .collect(Collectors.toList());
     }
+
+
 
 
 

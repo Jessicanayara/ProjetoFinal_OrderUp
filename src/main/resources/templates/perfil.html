@@ -33,10 +33,11 @@
             <p>Email: <span th:text="${usuario.email}"></span></p>
           </div>
           <div class="card-footer ">
-            <button href="clienteservice.html" type="button" class="btn btn-outline-dark">Novo Cliente</button>
+            <a th:href="@{'/' + ${id} + '/clienteservice'}" class="btn btn-outline-dark">Novos Clientes</a>
           </div>
           <div class="card-footer ">
-            <button href="clientelist.html" type="button" class="btn btn-outline-dark">Clientes</button>
+              <a th:href="@{'/' + ${id} + '/clientelist'}" class="btn btn-outline-dark">Clientes</a>
+            </button>
           </div>
         </div>
 

@@ -1,8 +1,5 @@
 const toolbarLinks = document.querySelectorAll('.toolbar a.nav-link');
-const formcliente = document.getElementById('formclienteupdate');
-const formordem = document.getElementById('formordemupdate');
-const voltarordem = document.getElementById('voltarordem');
-const voltarcliente = document.getElementById('voltarcliente');
+
 
 
 toolbarLinks.forEach(link => {
@@ -14,30 +11,32 @@ toolbarLinks.forEach(link => {
 
 function redirecionarcliente() {
     let url = window.location.href;
-    let userId = url.split('/').slice(-2)[0];
+    let userId = url.split('/').slice(-3)[0];
     alert("Campos editados com sucesso!");
     window.location.href = "/"+userId+"/clientelist";
 }
 
-formcliente.addEventListener("submit", redirecionarcliente);
+
 
 function redirecionarordem() {
     let url = window.location.href;
-    let userId = url.split('/').slice(-2)[0];
+    let userId = url.split('/').slice(-3)[0];
     alert("Campos editados com sucesso!");
     window.location.href = "/"+userId+"/ordemlist";
 }
 
-formordem.addEventListener("submit", redirecionarordem);
 
-voltarordem.addEventListener("click", () => {
+
+function voltarordem(){
     let url = window.location.href;
-    let userId = url.split('/').slice(-2)[0];
+    let userId = url.split('/').slice(-3)[0];
     window.location.href ="/"+userId+"/ordemlist";
-});
+}
 
-voltarcliente.addEventListener("click", () => {
+function voltarcliente(){
     let url = window.location.href;
-    let userId = url.split('/').slice(-2)[0];
+    let userId = url.split('/').slice(-3)[0];
+
+    console.log(userId)
     window.location.href = "/"+userId+"/clientelist";
-});
+}
