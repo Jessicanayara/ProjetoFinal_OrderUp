@@ -4,13 +4,17 @@ let modal = document.getElementById('modal');
 function limpar(){
     form.reset();
 }
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    exibirModal();
-});
+
 
 function exibirModal() {
     console.log('oi')
    modal.style.display='block'
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    var mensagemSalvo = "[[${mensagemSalvo}]]";
+    if (mensagemSalvo && mensagemSalvo.trim() !== '') {
+       var modal = document.getElementById('modal');
+        modal.style.display = 'block';
+    }
+});

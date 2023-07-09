@@ -72,9 +72,14 @@ public class OrdemControl {
 
             modelAndView.addObject("ordem", ordemDTO);
             modelAndView.addObject("mensagemSalvo", "Salvo com sucesso!");
+            System.out.println("Mensagem de sucesso: " + modelAndView.getModel().get("mensagemSalvo"));
+
             modelAndView.setViewName("ordemservice");
             Thread.sleep(2000);
+
+
             return modelAndView;
+
         } catch (Exception e) {
             modelAndView.addObject("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
             return modelAndView;
