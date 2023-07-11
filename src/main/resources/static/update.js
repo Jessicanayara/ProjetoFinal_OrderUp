@@ -1,9 +1,8 @@
 const toolbarLinks = document.querySelectorAll('.toolbar a.nav-link');
-const formcliente = document.getElementById('formclienteupdate');
-const formordem = document.getElementById('formordemupdate');
-const voltarordem = document.getElementById('voltarordem');
-const voltarcliente = document.getElementById('voltarcliente');
+const formcliente = document.getElementById('formc');
+const formordem = document.getElementById('formo');
 
+var modal = document.getElementById('modal');
 
 toolbarLinks.forEach(link => {
     link.addEventListener('click', event => {
@@ -12,32 +11,39 @@ toolbarLinks.forEach(link => {
     });
 });
 
-function redirecionarcliente() {
+
+
+function voltarordem(){
     let url = window.location.href;
-    let userId = url.split('/').slice(-2)[0];
-    alert("Campos editados com sucesso!");
-    window.location.href = "/"+userId+"/clientelist";
-}
-
-formcliente.addEventListener("submit", redirecionarcliente);
-
-function redirecionarordem() {
-    let url = window.location.href;
-    let userId = url.split('/').slice(-2)[0];
-    alert("Campos editados com sucesso!");
-    window.location.href = "/"+userId+"/ordemlist";
-}
-
-formordem.addEventListener("submit", redirecionarordem);
-
-voltarordem.addEventListener("click", () => {
-    let url = window.location.href;
-    let userId = url.split('/').slice(-2)[0];
+    let userId = url.split('/').slice(-3)[0];
     window.location.href ="/"+userId+"/ordemlist";
+}
+
+function  voltarcliente(){
+    let url = window.location.href;
+    let userId = url.split('/').slice(-3)[0];
+    window.location.href = "/"+userId+"/clientelist";}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var mensagemSalvo = "[[${mensagemSalvo}]]";
+    if (modal !== null && mensagemSalvo && mensagemSalvo.trim() !== '') {
+
+        modal.style.display = 'block';
+
+    }
 });
 
-voltarcliente.addEventListener("click", () => {
+function closeModalordem(){
     let url = window.location.href;
-    let userId = url.split('/').slice(-2)[0];
-    window.location.href = "/"+userId+"/clientelist";
-});
+    let userId = url.split('/').slice(-3)[0];
+    modal.style.display = 'none';
+    window.location.href ="/"+userId+"/ordemlist";
+
+}
+function closeModalcliente(){
+    let url = window.location.href;
+    let userId = url.split('/').slice(-3)[0];
+    modal.style.display = 'none';
+    window.location.href ="/"+userId+"/clientelist";
+
+}

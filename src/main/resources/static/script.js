@@ -1,20 +1,20 @@
 let form = document.getElementById('formservice');
-let modal = document.getElementById('modal');
+var modal = document.getElementById('modal');
 
 function limpar(){
     form.reset();
 }
 
-
-function exibirModal() {
-    console.log('oi')
-   modal.style.display='block'
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     var mensagemSalvo = "[[${mensagemSalvo}]]";
-    if (mensagemSalvo && mensagemSalvo.trim() !== '') {
-       var modal = document.getElementById('modal');
+    if (modal !== null && mensagemSalvo && mensagemSalvo.trim() !== '') {
+
         modal.style.display = 'block';
+        form.reset();
     }
 });
+
+function closeModal(){
+    modal.style.display = 'none';
+    form.reset();
+}

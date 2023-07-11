@@ -48,20 +48,19 @@ public class OrdemControl {
     }
 
     @PostMapping("/{id}/ordemservice")
-    public ModelAndView createOrdem(@Valid @ModelAttribute("ordem") OrdemDTO ordemDTO, BindingResult bindingResult, @PathVariable("id") String id, Model model) {
+    public String createOrdem(@Valid @ModelAttribute("ordem") OrdemDTO ordemDTO, BindingResult bindingResult, @PathVariable("id") String id, Model model, RedirectAttributes redirectAttributes) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
-        ModelAndView modelAndView = new ModelAndView();
         try {
             ClienteUpdateDTO clienteEncontrado = clienteService.findByNomeAndUsuarioCpf(ordemDTO.getCliente().getNome(), usuarioDTO.getCpf());
 
             if (bindingResult.hasErrors()) {
-                modelAndView.addObject("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
-                return modelAndView;
+                model.addAttribute("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
+                return "ordemservice";
             }
 
             if (clienteEncontrado == null) {
-                modelAndView.addObject("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
-                return modelAndView;
+                model.addAttribute("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
+                return "ordemservice";
             }
 
             ordemDTO.setUsuario(usuarioDTO);
@@ -69,22 +68,16 @@ public class OrdemControl {
 
             ordemService.save(ordemDTO);
 
+            model.addAttribute("mensagemSalvo", "Salvo com sucesso!");
 
-            modelAndView.addObject("ordem", ordemDTO);
-            modelAndView.addObject("mensagemSalvo", "Salvo com sucesso!");
-            System.out.println("Mensagem de sucesso: " + modelAndView.getModel().get("mensagemSalvo"));
-
-            modelAndView.setViewName("ordemservice");
-            Thread.sleep(2000);
-
-
-            return modelAndView;
-
+            return "ordemservice";
         } catch (Exception e) {
-            modelAndView.addObject("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
-            return modelAndView;
+            redirectAttributes.addFlashAttribute("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
+
+            return "ordemservice";
         }
     }
+
 
 
     @GetMapping("/{id}/ordemlist")
@@ -109,11 +102,13 @@ public class OrdemControl {
 
 
     @PostMapping("/{id}/{ordemid}/ordemupdate")
-    public String updateOrdem(@PathVariable("id") String id, @PathVariable("ordemid") Long ordemId, @ModelAttribute("ordem") OrdemUpdateDTO ordemUpdateDTO) {
+    public String updateOrdem(@PathVariable("id") String id, @PathVariable("ordemid") Long ordemId, @ModelAttribute("ordem") OrdemUpdateDTO ordemUpdateDTO, Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
         ordemUpdateDTO.setUsuario(usuarioDTO);
         ordemService.atualizarOrdem(id, ordemId, ordemUpdateDTO);
-        return "redirect:/" + id + "/ordemlist";
+        model.addAttribute("mensagemSalvo", "Salvo com sucesso!");
+        
+        return "ordemupdate";
     }
 
 

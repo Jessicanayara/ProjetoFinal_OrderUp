@@ -51,13 +51,13 @@
                         <div class="container text-center">
                             <div class="row justify-content-md-center">
                                 <div class="col col-lg-2">
-                                    <button type="button" class="btn btn-outline-success" id="voltarc" onclick="voltarcliente()">Voltar</button>
+                                    <button type="button" class="btn btn-outline-success"  onclick="voltarcliente()">Voltar</button>
                                 </div>
                                 <div class="col-md-auto">
                                     <span></span>
                                 </div>
                                 <div class="col col-lg-2">
-                                    <button type="submit" class="btn btn-success" onclick="redirecionarcliente()">Salvar</button>
+                                    <button type="submit" class="btn btn-success" >Salvar</button>
                                 </div>
                             </div>
                         </div>
@@ -66,6 +66,26 @@
             </div>
         </div>
     </div>
+    <div th:if="${not #strings.isEmpty(mensagemSalvo)}" class="success-message" id="chamarmodal">
+        <div class="modal" tabindex="-1" id="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Aviso</h5>
+                        <button type="button" class="btn-close" onclick=" closeModalcliente()" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <span th:text="${mensagemSalvo}"></span>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </form>
 <script src="http://localhost:8080/../update.js"></script>
 </body>

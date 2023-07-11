@@ -65,8 +65,8 @@ public class ClienteController {
             clienteDTO.setUsuario(usuarioDTO);
             clienteService.save(clienteDTO);
             model.addAttribute("cliente", clienteDTO);
-            model.addAttribute("mensagemSucesso", "Cliente cadastrado com sucesso!");
-            return "redirect:/" + id + "/clientelist";
+            model.addAttribute("mensagemSalvo", "Cliente cadastrado com sucesso!");
+            return "clienteservice";
 
         } catch (IllegalArgumentException e) {
             model.addAttribute("mensagemErro", "Cliente não cadastrado. " + e.getMessage());
@@ -92,10 +92,11 @@ public class ClienteController {
 
 
     @PostMapping("/{id}/{clienteid}/clienteupdate")
-    public String updateCliente(@PathVariable("id") String id, @PathVariable("clienteid") Long clienteId, @ModelAttribute("cliente") ClienteUpdateDTO clienteUpdateDTO) {
+    public String updateCliente(@PathVariable("id") String id, @PathVariable("clienteid") Long clienteId, @ModelAttribute("cliente") ClienteUpdateDTO clienteUpdateDTO,Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
         clienteUpdateDTO.setUsuario(usuarioDTO);
         clienteService.atualizarCliente( clienteId, id,  clienteUpdateDTO);
+        model.addAttribute("mensagemSalvo", "Cliente cadastrado com sucesso!");
         return "clienteupdate";
     }
 
