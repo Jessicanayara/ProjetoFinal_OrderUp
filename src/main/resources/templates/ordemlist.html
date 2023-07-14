@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Armazenamento</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
 </head>
@@ -15,11 +16,25 @@
     <div class="card" >
         <div class="card-body">
 
+            <div class="row g-2">
+                <div class="col-md">
+                    <button class="btn btn-link toolbar-link btn-voltar">
+                        <i class="bi bi-arrow-left"></i>
+                    </button>
+                </div>
+                <div class="col-md">
+                    <h3>Ordens de serviços armazenadas</h3>
+                </div>
 
+            </div>
             <div class="card" id="AM">
                 <div class="card-body">
 
                     <table class="table table-hover">
+
+                            <div class="spinner-border d-none " role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
 
                         <thead>
                         <tr>
@@ -36,7 +51,7 @@
 
                             <td>
                                 <form th:action="@{'/' + ${id} + '/' + ${ordem.id} + '/deleteorder'}" method="post" id="form-excluir">
-                                    <button class="btn btn-warning" onclick="excluirOrdem(event)">Excluir</button>
+                                    <button class="btn btn-warning" onclick="confirmarExclusao()">Excluir</button>
                                 </form>
                             </td>
 
@@ -52,9 +67,6 @@
 
                     </table>
 
-                    <div th:if="${mensagemErro}" class="error-message">
-                        <span th:text="${mensagemErro}"></span>
-                    </div>
 
                 </div>
 
@@ -62,12 +74,30 @@
 
         </div>
     </div>
+    <div th:if="${not #strings.isEmpty(mensagemSalvo) or not #strings.isEmpty(mensagemErro)}" class="success-message" >
+        <div class="modal" tabindex="-1" id="modalretorn">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Aviso</h5>
+                        <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <span th:text="${mensagemSalvo}"></span>
+                            <span th:text="${mensagemErro}"></span>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
 
 
-<script src="http://localhost:8080/../list.js"></script>
+<script type="application/javascript" src="/list.js" defer></script>
 </body>
 </html>

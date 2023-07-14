@@ -21,7 +21,9 @@
                 <div class="card-body">
 
                     <table class="table table-hover">
-
+                        <div class="spinner-border d-none " role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -35,8 +37,8 @@
                             <td th:text="${cliente.nome} "  class="cliente-nome"></td>
                             <td th:text="${cliente.email}"></td>
 
-                            <td><form th:action="@{'/' + ${id} + '/' + ${cliente.id} + '/delete'}" method="post" id="form-excluir">
-                                <button class="btn btn-warning"  onclick="excluirOrdem(event)">Excluir</button>
+                            <td> <form th:action="@{'/' + ${id} + '/' + ${cliente.id} + '/deletecliente'}" method="post" id="form-excluir">
+                                <button class="btn btn-warning" onclick="confirmarExclusao()">Excluir</button>
                             </form>
                             </td>
 
@@ -51,19 +53,35 @@
 
                     </table>
 
-                    <div th:if="${mensagemErro}" class="error-message">
-                        <span th:text="${mensagemErro}"></span>
-                    </div>
+
 
                 </div>
 
             </div>
 
         </div>
+        <div th:if="${not #strings.isEmpty(mensagemSalvo) or not #strings.isEmpty(mensagemErro)}" class="success-message" >
+            <div class="modal" tabindex="-1" id="modalretorn">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Aviso</h5>
+                            <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                            <span th:text="${mensagemSalvo}"></span>
+                            <span th:text="${mensagemErro}"></span>
+                           </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-
+    </div>
 </div>
-<script src="http://localhost:8080/../list.js"></script>
+<script type="application/javascript" src="/list.js" defer></script>
 </body>
 </html>

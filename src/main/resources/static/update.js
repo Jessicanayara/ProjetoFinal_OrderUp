@@ -37,7 +37,7 @@ function closeModalordem(){
     let url = window.location.href;
     let userId = url.split('/').slice(-3)[0];
     modal.style.display = 'none';
-    window.location.href ="/"+userId+"/ordemlist";
+
 
 }
 function closeModalcliente(){

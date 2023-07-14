@@ -20,7 +20,30 @@
                     <div class="card-body">
                         <div class="row g-4">
                             <div class="col-md">
+                        <div class="form-floating">
+                            <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" th:field="*{nome}" disabled>
+                        </div>
+                            </div>
+                                <div class="col-md">
                                 <div class="form-floating">
+                                    <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" th:field="*{cnpj}" disabled>
+                                </div>
+                                </div>
+                                    <div class="col-md">
+                                <div class="form-floating">
+                                    <input class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" th:field="*{cpf}" disabled>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+
+
+
+                            <div class="col-md">
+
+                                    <div class="form-floating">
                                     <input type="email" class="form-control" id="email" th:field="*{email}" required>
                                     <label for="email">Email</label>
                                 </div>
@@ -85,7 +108,7 @@
             </div>
         </div>
     </div>
-
+    </div>
 </form>
 <script src="http://localhost:8080/../update.js"></script>
 </body>

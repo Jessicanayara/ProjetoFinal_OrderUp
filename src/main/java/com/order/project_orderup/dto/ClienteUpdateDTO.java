@@ -1,5 +1,6 @@
 package com.order.project_orderup.dto;
 
+import com.order.project_orderup.model.Ordem;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,9 @@ public class ClienteUpdateDTO {
     private UsuarioDTO usuario;
 
     private Integer numeroCliente;
+
+    private List<Ordem> ordensServico;
+
 
     @NotBlank(message = "Nome é obrigatorio")
     private String nome;

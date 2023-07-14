@@ -1,4 +1,5 @@
 let form = document.getElementById('formservice');
+let formcliente = document.getElementById('formc');
 var modal = document.getElementById('modal');
 
 function limpar(){
@@ -17,4 +18,5 @@ document.addEventListener('DOMContentLoaded', function() {
 function closeModal(){
     modal.style.display = 'none';
     form.reset();
+
 }

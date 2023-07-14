@@ -8,6 +8,7 @@ import com.order.project_orderup.service.OrdemService;
 import com.order.project_orderup.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -90,7 +91,7 @@ public class OrdemControl {
         if (ordensDTO.isEmpty()) {
 
             model.addAttribute("mensagemErro", "Nenhuma ordem encontrada");
-            return "ordemlist";
+
         }
 
         model.addAttribute("ordem", ordensDTO);
@@ -122,10 +123,11 @@ public class OrdemControl {
 
 
     @PostMapping ("/{id}/{ordemid}/deleteorder")
-    public String deleteOrdemById(@PathVariable("id") String id,@PathVariable("ordemid") Long ordemId) {
+    public String deleteOrdemById(@PathVariable("id") String id, @PathVariable("ordemid") Long ordemId , Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
         ordemService.delete(id,ordemId);
-        return "redirect:/" + id + "/ordemlist";
+        model.addAttribute("mensagemSalvo", "Excluido com sucesso!");
+        return "ordemlist";
     }
 
 

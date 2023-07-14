@@ -106,9 +106,6 @@ public class ClienteService {
     @Transactional
     public void delete( Long clienteId ,String id) {
         Cliente cliente = clienteRepository.findByIdAndUsuarioCpf(clienteId,id);
-        if (cliente == null) {
-            throw new IllegalArgumentException("O cliente não pertence ao usuário.");
-        }
         clienteRepository.delete(cliente);
     }
 

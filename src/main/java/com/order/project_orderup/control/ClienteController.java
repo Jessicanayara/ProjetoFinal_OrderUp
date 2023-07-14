@@ -39,11 +39,11 @@ public class ClienteController {
     public String createCliente( @PathVariable("id") String id, @Valid @ModelAttribute("cliente") ClienteDTO clienteDTO, BindingResult bindingResult, Model model) {
         UsuarioDTO usuarioDTO = usuarioService.buscar(id);
 
-
+        try {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("mensagemErro", "Erro de validação. Verifique os campos e tente novamente.");
-            model.addAttribute("id", id);
+
             return "clienteservice";
         }
 
@@ -61,7 +61,7 @@ public class ClienteController {
             return "clienteservice";
         }
 
-        try {
+
             clienteDTO.setUsuario(usuarioDTO);
             clienteService.save(clienteDTO);
             model.addAttribute("cliente", clienteDTO);
@@ -108,10 +108,20 @@ public class ClienteController {
     }
 
 
-    @PostMapping("/{id}/{cliente_id}/delete")
-    public String deleteClienteById(@PathVariable("id") String id, @PathVariable("cliente_id") long clienteId) {
-        clienteService.delete(clienteId, id);
-        return "redirect:/" + id + "/clientelist";
-    }
+    @PostMapping("/{id}/{cliente_id}/deletecliente")
+    public String deleteClienteById(@PathVariable("id") String id, @PathVariable("cliente_id") long clienteId, Model model) {
+        ClienteUpdateDTO cliente = clienteService.obtercliente(clienteId, id); // Obter o cliente pelo ID
 
+
+        if (cliente.getOrdensServico() != null && !cliente.getOrdensServico().isEmpty()) {
+            model.addAttribute("mensagemErro", "Esse cliente possui ordens de serviço associadas!");
+           return  "clientelist";
+        }
+
+        clienteService.delete(clienteId, id);
+        model.addAttribute("mensagemSalvo", "Excluido com sucesso!");
+
+
+        return "clientelist";
+    }
 }

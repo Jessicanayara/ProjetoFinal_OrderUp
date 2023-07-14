@@ -3,6 +3,7 @@ package com.order.project_orderup.control;
 import com.order.project_orderup.dto.UsuarioDTO;
 import com.order.project_orderup.service.UsuarioService;
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +47,7 @@ public class UsuarioController {
 
 
 
+
     @PostMapping("/cadastrar")
     public String cadastrarUsuario(  @Valid @ModelAttribute("usuarioDTO") UsuarioDTO usuarioDTO, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -63,12 +65,13 @@ public class UsuarioController {
         UsuarioDTO usuarioCPF = usuarioService.findByCpf(usuarioDTO.getCpf());
         if (usuarioCPF != null) {
             model.addAttribute("mensagemErro", "Usuário já existe com este CPF");
+
             return "home";
         }
 
         try {
             UsuarioDTO novoUsuario = usuarioService.save(usuarioDTO);
-            model.addAttribute("mensagemSucesso", "Usuário cadastrado com sucesso!");
+            model.addAttribute("mensagemSalvo", "Usuário cadastrado com sucesso!");
             return "home";
         } catch (IllegalArgumentException e) {
             model.addAttribute("mensagemErro", "Usuário não cadastrado. " + e.getMessage());
