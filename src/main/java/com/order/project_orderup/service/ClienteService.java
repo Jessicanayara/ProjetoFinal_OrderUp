@@ -39,7 +39,6 @@ public class ClienteService {
     public ClienteDTO save(ClienteDTO clienteDTO) {
         ClienteDTO clienteCNPJ= findByCnpj(clienteDTO.getCnpj());
         ClienteDTO clienteCPF = findByCpf(clienteDTO.getCpf());
-        System.out.println();
         if (clienteCPF != null) {
             throw new IllegalArgumentException("Usuário já existe com este email");
         }

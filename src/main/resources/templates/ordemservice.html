@@ -153,9 +153,11 @@
                         <div class="col col-lg-2">
                             <button  type="submit" class="btn btn-success" >Salvar</button>
                         </div>
+
+                      </div>
                     </div>
                 </div>
-                </div>
+
                     <div th:if="${not #strings.isEmpty(mensagemSalvo) or not #strings.isEmpty(mensagemErro)}" class="success-message" id="chamarmodal">
                         <div class="modal" tabindex="-1" id="modal">
                             <div class="modal-dialog">
@@ -177,8 +179,6 @@
                     </div>
                 </form>
 
-
-
                 </div>
             </div>
         </div>
@@ -186,6 +186,6 @@
 
 
 
-<script type="application/javascript" src="/js/script.js" defer></script>
+<script type="application/javascript" src="/js/ordem.js" defer></script>
 </body>
 </html>

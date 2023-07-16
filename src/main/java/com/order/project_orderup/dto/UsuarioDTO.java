@@ -25,7 +25,6 @@ public class UsuarioDTO {
     @NotBlank(message = "Email é obrigatório")
     private String email;
 
-    @NotBlank(message = "Senha é obrigatório")
     @Size(min = 6, message = "A senha deve conter pelo menos 6 caracteres")
     private String senha;
 

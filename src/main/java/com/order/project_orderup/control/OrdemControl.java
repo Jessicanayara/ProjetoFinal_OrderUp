@@ -62,6 +62,8 @@ public class OrdemControl {
                 return "ordemservice";
             }
 
+            ordemDTO.setUsuario(usuarioDTO);
+            ordemDTO.setCliente(clienteEncontrado);
 
             ordemService.save(ordemDTO);
 
