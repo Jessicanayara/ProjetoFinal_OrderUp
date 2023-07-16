@@ -28,14 +28,14 @@ public class UsuarioController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    public String logout(HttpServletRequest request)  {
         request.getSession().invalidate();
 
         return "redirect:/home";
     }
 
     @GetMapping("/home")
-    public String form( Model model) {
+    public String form( ) {
         return "home";
     }
 
