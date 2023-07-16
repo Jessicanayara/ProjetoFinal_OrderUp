@@ -36,7 +36,6 @@ public class UsuarioController {
 
     @GetMapping("/home")
     public String form( Model model) {
-        model.addAttribute("usuarioDTO", new UsuarioDTO());
         return "home";
     }
 
