@@ -46,7 +46,7 @@
 </ol>
 
 <h3 id="demonstracao">Demonstração da aplicação</h3>
-<a href="https://www.canva.com/design/DAFohPGyHjM/Si3H-yQQcfbVyiFrBb3O8g/watch?utm_content=DAFohPGyHjM&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">Video da aplicação em funcionamento</a>
+<a href="https://www.canva.com/design/DAFo15PKjzI/ZBYNbuBx6Lvo_daAatVvFA/watch?utm_content=DAFo15PKjzI&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink">Video da aplicação em funcionamento</a>
 
 <h3 id="licenca">Licença</h3>
 <p>Este projeto está licenciado sob a licença MIT. Consulte o arquivo <a href="LICENSE">LICENSE</a> para obter mais informações.</p>
