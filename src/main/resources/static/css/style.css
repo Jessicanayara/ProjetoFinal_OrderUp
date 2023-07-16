@@ -62,7 +62,7 @@ span{
 
 .card-section {
     height: 100vh;
-    background-image: url('imagens/backgroundUp.png');
+    background-image: url('../imagens/backgroundUp.png');
     background-size: cover;
     background-position: center;
 }
@@ -74,46 +74,19 @@ span{
 .card-section .col-10 {
     max-width: 400px;
 }
-#cadastro{
+#cadastro,#modalretorn,#cep-erro{
 
     display: none;
 }
 
 
-#modalretorn{
-    display: none;
-}
-
-#modalconfirm{
-    display: none;
-
-}
-
-.spinner-border {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
 
 
-.toolbar-container {
-    display: flex;
-    align-items: center;
-    margin-left: 250px;
-    padding: 15px;
-}
 
-#btn-voltar {
-    margin-right: 10px;
-    color: red;
-    font-size: 24px;
-    padding: 10px;
-}
 
-.titulo {
-    margin: 0;
-}
+ .material-icons {
+    color: grey;
 
+ }
 
 

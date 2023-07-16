@@ -13,6 +13,7 @@ import com.order.project_orderup.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,7 +26,6 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
         this.modelMapper = modelMapper;
     }
-
     @Transactional
     public UsuarioDTO save(UsuarioDTO usuarioDTO) {
         UsuarioDTO usuarioEmail = findByEmail(usuarioDTO.getEmail());
@@ -63,11 +63,13 @@ public class UsuarioService {
 
 
 
+
     public UsuarioDTO buscar(String cpf) {
         Usuario usuario = usuarioRepository.findById(cpf)
                 .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
         return modelMapper.map(usuario, UsuarioDTO.class);
     }
+
 
 
 }

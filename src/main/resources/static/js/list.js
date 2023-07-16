@@ -36,3 +36,10 @@ function confirmarExclusao() {
         document.getElementById("form-excluir").submit();
     }
 }
+function home(){
+    let url = window.location.href;
+    let userId = url.split('/').slice(-2)[0];
+    let redirectUrlperfil = "/" + userId + "/perfil";
+    window.location.href = redirectUrlperfil;
+
+}

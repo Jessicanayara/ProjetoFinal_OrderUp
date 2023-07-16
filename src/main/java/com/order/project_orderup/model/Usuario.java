@@ -1,12 +1,8 @@
 package com.order.project_orderup.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Usuario {
+public class Usuario{
     @Id
     private String cpf;
 
@@ -28,9 +24,6 @@ public class Usuario {
 
     @Column(length = 100)
     private String senha;
-
-
-
 
 
 }

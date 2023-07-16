@@ -3,19 +3,15 @@ package com.order.project_orderup.control;
 
 import com.order.project_orderup.dto.*;
 
-import com.order.project_orderup.service.ClienteService;
-import com.order.project_orderup.service.OrdemService;
-import com.order.project_orderup.service.UsuarioService;
+import com.order.project_orderup.service.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -28,7 +24,9 @@ public class OrdemControl {
     private OrdemService ordemService;
     private UsuarioService usuarioService;
     private ClienteService clienteService;
-    private RedirectAttributes redirectAttributes;
+
+
+
 
     @Autowired
     public OrdemControl(OrdemService ordemService, UsuarioService usuarioService , ClienteService clienteService) {
@@ -64,8 +62,6 @@ public class OrdemControl {
                 return "ordemservice";
             }
 
-            ordemDTO.setUsuario(usuarioDTO);
-            ordemDTO.setCliente(clienteEncontrado);
 
             ordemService.save(ordemDTO);
 

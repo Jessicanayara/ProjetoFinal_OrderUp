@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Lista de clientes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 <body>
@@ -15,7 +17,15 @@
 <div class="card-container">
     <div class="card" >
         <div class="card-body">
-
+            <div class="row g-2">
+                <div class="col d-flex align-items-start">
+                    <button class="btn btn-link toolbar-link btn-voltar" onclick="home()">
+                        <i class="material-icons">arrow_back</i>
+                    </button></div>
+                <div class="col-8 d-flex align-items-start ">
+                    <h3 class="text-center">Clientes armazenados</h3>
+                </div>
+            </div>
 
             <div class="card" id="AM">
                 <div class="card-body">
@@ -82,6 +92,6 @@
 
     </div>
 </div>
-<script type="application/javascript" src="/list.js" defer></script>
+<script type="application/javascript" src="/js/list.js" defer></script>
 </body>
 </html>

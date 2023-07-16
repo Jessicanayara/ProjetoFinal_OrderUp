@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" >
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ordem de serviço</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
@@ -12,10 +16,20 @@
 
 <div th:replace="~{toolbar.html}"></div>
 
-<form th:action="@{'/' + ${id} + '/ordemservice'}" method="post" th:object="${ordem}" id="formservice">
+
     <div class="card-container">
         <div class="card">
             <div class="card-body">
+                <div class="row g-2">
+                    <div class="col d-flex align-items-start">
+                        <button class="btn btn-link toolbar-link btn-voltar" onclick="home()">
+                            <i class="material-icons">arrow_back</i>
+                        </button></div>
+                    <div class="col-8 d-flex align-items-start ">
+                        <h3 class="text-center">Cadastrar Ordem de serviço</h3>
+                    </div>
+                </div>
+                <form th:action="@{'/' + ${id} + '/ordemservice'}" method="post" th:object="${ordem}" id="formservice">
                 <div class="card" id="os">
                     <div class="card-body">
                         <div class="row g-4">
@@ -141,38 +155,37 @@
                         </div>
                     </div>
                 </div>
+                </div>
+                    <div th:if="${not #strings.isEmpty(mensagemSalvo) or not #strings.isEmpty(mensagemErro)}" class="success-message" id="chamarmodal">
+                        <div class="modal" tabindex="-1" id="modal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Aviso</h5>
+                                        <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span th:text="${mensagemSalvo}"></span>
+                                        <span th:text="${mensagemErro}"></span>
 
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
 
 
                 </div>
             </div>
         </div>
-    </div>
-    <div th:if="${not #strings.isEmpty(mensagemSalvo) or not #strings.isEmpty(mensagemErro)}" class="success-message" id="chamarmodal">
-        <div class="modal" tabindex="-1" id="modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Aviso</h5>
-                        <button type="button" class="btn-close" aria-label="Close" onclick="closeModal()"></button>
-                    </div>
-                    <div class="modal-body">
-                        <span th:text="${mensagemSalvo}"></span>
-                        <span th:text="${mensagemErro}"></span>
-
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
 
 
 
 
-<script src="http://localhost:8080/../script.js"></script>
+<script type="application/javascript" src="/js/script.js" defer></script>
 </body>
 </html>

@@ -2,6 +2,9 @@ package com.order.project_orderup.control;
 
 import com.order.project_orderup.dto.UsuarioDTO;
 import com.order.project_orderup.service.UsuarioService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,12 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        request.getSession().invalidate();
+
+        return "redirect:/home";
+    }
 
     @GetMapping("/home")
     public String form( Model model) {
@@ -89,6 +98,8 @@ public class UsuarioController {
         model.addAttribute("usuario", usuario);
         return "perfil";
     }
+
+
 
 
 
