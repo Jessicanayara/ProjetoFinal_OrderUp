@@ -2,7 +2,6 @@ package com.order.project_orderup.control;
 
 import com.order.project_orderup.dto.ClienteDTO;
 import com.order.project_orderup.dto.ClienteUpdateDTO;
-import com.order.project_orderup.dto.OrdemUpdateDTO;
 import com.order.project_orderup.dto.UsuarioDTO;
 import com.order.project_orderup.service.ClienteService;
 import com.order.project_orderup.service.UsuarioService;

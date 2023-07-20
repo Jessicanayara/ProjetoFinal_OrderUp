@@ -1,7 +1,7 @@
 package com.order.project_orderup.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
+
 import java.util.stream.Collectors;
 
 
@@ -35,11 +35,8 @@ public class OrdemService {
 
         Integer ultimoNumeroOrdem = ordemRepository.findMaxNumeroOrdemByUsuario(ordemDTO.getUsuario().getCpf());
 
-
         Integer proximoNumeroOrdem = ultimoNumeroOrdem != null ? ultimoNumeroOrdem + 1 : 1;
         ordem.setNumeroOrdem(proximoNumeroOrdem);
-
-
         Ordem savedOrdem = ordemRepository.save(ordem);
         return modelMapper.map(savedOrdem, OrdemDTO.class);
 

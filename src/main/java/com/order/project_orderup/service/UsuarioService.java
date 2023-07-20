@@ -1,11 +1,8 @@
 package com.order.project_orderup.service;
 
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Collectors;
+
 
 import com.order.project_orderup.dto.UsuarioDTO;
 import com.order.project_orderup.model.Usuario;

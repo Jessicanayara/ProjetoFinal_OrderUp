@@ -1,18 +1,14 @@
 package com.order.project_orderup.service;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 import com.order.project_orderup.dto.ClienteDTO;
 import com.order.project_orderup.dto.ClienteUpdateDTO;
-import com.order.project_orderup.dto.OrdemUpdateDTO;
 import com.order.project_orderup.dto.UsuarioDTO;
 import com.order.project_orderup.model.Cliente;
-import com.order.project_orderup.model.Ordem;
 import com.order.project_orderup.repository.ClienteRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

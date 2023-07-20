@@ -2,9 +2,7 @@ package com.order.project_orderup.control;
 
 import com.order.project_orderup.dto.UsuarioDTO;
 import com.order.project_orderup.service.UsuarioService;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
